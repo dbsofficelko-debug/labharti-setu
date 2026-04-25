@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="UP सरकारी योजनाओं की सम्पूर्ण जानकारी — निःशुल्क, हिंदी में, बिना login के">
+<title>लाभार्ती सेतु — आपका हक, आपकी जानकारी</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8651A;
+  --saffron-lite: #FEF0E7;
+  --saffron-mid: #F4955C;
+  --green: #1B6B3A;
+  --green-lite: #EAF4EE;
+  --navy: #1C2B4A;
+  --navy-lite: #EEF1F7;
+  --red: #C0392B;
+  --red-lite: #FDECEA;
+  --gold: #C8860A;
+  --gold-lite: #FEF9EC;
+  --white: #FAFAF8;
+  --grey: #F2F1EE;
+  --border: #E0DDD8;
+  --text: #1A1A1A;
+  --text-mid: #555;
+  --text-light: #888;
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Baloo 2', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--navy);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--saffron); flex-shrink: 0; }
+.brand-name { color: #fff; font-weight: 800; font-size: 16px; letter-spacing: 0.2px; }
+.brand-sub { color: rgba(255,255,255,0.5); font-size: 10px; display: block; font-weight: 400; }
+.header-badge {
+  background: rgba(232,101,26,0.15);
+  border: 1px solid rgba(232,101,26,0.3);
+  color: var(--saffron-mid);
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(150deg, var(--navy) 0%, #1E3A5F 50%, #1B4A2E 100%);
+  padding: 36px 18px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(232,101,26,0.12) 0%, transparent 55%),
+              radial-gradient(ellipse at 85% 30%, rgba(27,107,58,0.15) 0%, transparent 50%);
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-size: 11px; padding: 5px 14px;
+  border-radius: 20px; margin-bottom: 14px;
+  letter-spacing: 0.8px;
+}
+.hero h1 {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(30px, 8vw, 46px);
+  color: #fff; font-weight: 400;
+  line-height: 1.2; margin-bottom: 4px;
+}
+.hero h1 em { color: var(--saffron-mid); font-style: normal; }
+.hero-line {
+  width: 40px; height: 3px;
+  background: var(--saffron);
+  border-radius: 2px;
+  margin: 12px auto;
+}
+.hero p {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px; max-width: 320px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+.hero-promise {
+  display: flex;
+  justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+.promise-chip {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+}
+
+/* ── MAIN NAV TABS ── */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 49px;
+  z-index: 98;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  border: none; background: none;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: .2s; white-space: nowrap;
+}
+.tab.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 20px 16px 100px; max-width: 680px; margin: 0 auto; }
+.section.active { display: block; }
+
+/* ── SECTION TITLE ── */
+.sec-title { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.sec-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.6; }
+
+/* ── FINDER ── */
+.step-bar {
+  display: flex; align-items: center;
+  gap: 6px; margin-bottom: 20px;
+}
+.step-node {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  background: var(--grey); color: var(--text-light);
+  flex-shrink: 0; transition: .3s;
+}
+.step-node.active { background: var(--saffron); color: #fff; }
+.step-node.done { background: var(--green); color: #fff; }
+.step-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; transition: .3s; }
+.step-track.done { background: var(--green); }
+
+.q-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.q-step-label { font-size: 11px; font-weight: 700; color: var(--saffron); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.q-text { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opt {
+  padding: 14px 10px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: .2s;
+  font-family: 'Baloo 2', sans-serif;
+  position: relative;
+}
+.opt:active { transform: scale(0.97); }
+.opt.selected, .opt:hover { border-color: var(--saffron); background: var(--saffron-lite); }
+.opt-icon { font-size: 24px; display: block; margin-bottom: 5px; }
+.opt-label { font-size: 13px; font-weight: 700; color: var(--navy); display: block; }
+.opt-hint { font-size: 11px; color: var(--text-mid); display: block; margin-top: 2px; }
+
+/* ── RESULT CARD ── */
+.result-wrap { animation: slideUp .4s ease; }
+
+.result-top {
+  background: linear-gradient(135deg, var(--navy), #2A4470);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 20px 18px 18px;
+  position: relative; overflow: hidden;
+}
+.result-top::after {
+  content: '';
+  position: absolute; right: -16px; top: -16px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(232,101,26,0.12);
+}
+.result-tag {
+  display: inline-block;
+  background: var(--saffron);
+  color: #fff; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.result-name { font-size: 17px; font-weight: 800; color: #fff; line-height: 1.3; }
+.result-amt {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 7px 12px;
+  margin-top: 10px;
+}
+.result-amt-num { font-size: 18px; font-weight: 800; color: var(--saffron-mid); }
+.result-amt-label { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+.result-body {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 16px;
+}
+
+.info-block { padding: 12px 0; border-bottom: 1px solid var(--grey); }
+.info-block:last-child { border-bottom: none; padding-bottom: 0; }
+.info-block-label {
+  font-size: 10px; font-weight: 700;
+  color: var(--text-light); text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 6px;
+}
+.info-block-val { font-size: 14px; font-weight: 600; color: var(--navy); }
+.dot-list { list-style: none; }
+.dot-list li {
+  font-size: 13px; color: var(--text-mid);
+  padding: 4px 0 4px 16px; position: relative;
+}
+.dot-list li::before { content: '•'; position: absolute; left: 0; color: var(--saffron); font-weight: 700; }
+
+/* VIDEO LINK */
+.video-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--red-lite);
+  border: 1px solid rgba(192,57,43,0.15);
+  border-radius: var(--radius-sm);
+  padding: 13px 14px; margin-top: 14px;
+  text-decoration: none; cursor: pointer;
+  transition: .2s;
+}
+.video-btn:active { opacity: 0.85; }
+.play-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 13px;
+}
+.video-btn-text .vt-tag { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.8px; }
+.video-btn-text .vt-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-top: 2px; }
+
+/* WARNING */
+.warn-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--gold-lite);
+  border: 1px solid rgba(200,134,10,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px; margin-top: 12px;
+}
+.warn-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.warn-text { font-size: 12px; color: #7A5200; font-weight: 600; line-height: 1.6; }
+
+/* ACTION BTNS */
+.action-row { display: flex; gap: 10px; margin-top: 16px; }
+.btn-main {
+  flex: 1; padding: 13px;
+  background: var(--saffron); color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  text-decoration: none; display: block;
+  transition: .2s;
+}
+.btn-main:active { background: #C8551A; }
+.btn-outline {
+  flex: 1; padding: 13px;
+  background: #fff; color: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: var(--radius-sm);
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  text-decoration: none; display: block;
+  transition: .2s;
+}
+.btn-outline:active { background: var(--navy); color: #fff; }
+.btn-ghost {
+  width: 100%; padding: 11px;
+  background: var(--grey); color: var(--text-mid);
+  border: none; border-radius: var(--radius-sm);
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; margin-top: 10px; transition: .2s;
+}
+
+/* ── NOT ELIGIBLE ── */
+.ineligible-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 18px;
+  text-align: center; box-shadow: var(--shadow);
+  animation: slideUp .3s ease;
+}
+.ineligible-icon { font-size: 40px; margin-bottom: 12px; }
+.ineligible-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.ineligible-text { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 16px; }
+
+/* ── SCHEME CARDS ── */
+.scheme-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+  margin-bottom: 12px; box-shadow: var(--shadow);
+  cursor: pointer; transition: .2s;
+  text-decoration: none; display: block; color: inherit;
+}
+.scheme-card:active { border-color: var(--saffron); box-shadow: var(--shadow-md); }
+.sc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.sc-icon { font-size: 30px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sc-title { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+.sc-dept { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.sc-amt { font-size: 16px; font-weight: 800; color: var(--saffron); margin-bottom: 10px; }
+.sc-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 10px; border-top: 1px solid var(--grey);
+}
+.sc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.sc-tag {
+  background: var(--green-lite); color: var(--green);
+  font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 20px;
+}
+.sc-arrow { color: var(--saffron); font-weight: 700; font-size: 14px; }
+
+/* ── ALERTS ── */
+.alert-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 12px;
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.alert-head {
+  padding: 14px 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.urgency { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.urgency.high { background: var(--red); }
+.urgency.mid  { background: var(--gold); }
+.urgency.low  { background: var(--green); }
+.alert-scheme { font-size: 14px; font-weight: 700; color: var(--navy); }
+.alert-date {
+  margin-left: auto; font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+}
+.alert-body { padding: 0 16px 14px; }
+.alert-desc { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
+.alert-link {
+  display: inline-block; margin-top: 8px;
+  font-size: 12px; font-weight: 700; color: var(--saffron);
+  text-decoration: none;
+}
+
+/* TRAP SECTION */
+.trap-section {
+  background: var(--red-lite);
+  border: 1px solid rgba(192,57,43,0.15);
+  border-radius: var(--radius); padding: 16px;
+  margin-bottom: 12px;
+}
+.trap-title { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 10px; }
+.trap-list { list-style: none; }
+.trap-list li {
+  font-size: 12px; color: var(--text-mid);
+  padding: 7px 0 7px 20px;
+  border-bottom: 1px solid rgba(192,57,43,0.08);
+  position: relative; line-height: 1.5;
+}
+.trap-list li:last-child { border-bottom: none; }
+.trap-list li::before { content: '✕'; position: absolute; left: 0; color: var(--red); font-weight: 700; font-size: 11px; }
+
+.complaint-box {
+  background: var(--green-lite);
+  border: 1px solid rgba(27,107,58,0.15);
+  border-radius: var(--radius); padding: 16px;
+}
+.complaint-title { font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+.complaint-text { font-size: 12px; color: var(--text-mid); line-height: 1.8; }
+.complaint-text a { color: var(--navy); font-weight: 700; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--navy);
+  display: flex; justify-content: space-around;
+  padding: 8px 0 12px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  z-index: 99;
+}
+.bnav {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer; padding: 4px 14px;
+  border: none; background: none;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Baloo 2', sans-serif;
+  transition: .2s;
+}
+.bnav.active { color: var(--saffron-mid); }
+.bnav-icon { font-size: 20px; }
+.bnav-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3px; }
+
+/* ── FOOTER NOTE ── */
+.footer-note {
+  text-align: center;
+  font-size: 11px; color: var(--text-light);
+  padding: 8px 16px 16px;
+  line-height: 1.6;
+}
+.footer-note a { color: var(--saffron); text-decoration: none; }
+
+/* ── UTILS ── */
+.divider { height: 1px; background: var(--border); margin: 18px 0; }
+.mt8 { margin-top: 8px; }
+.mt16 { margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <div>
+      <span class="brand-name">लाभार्ती सेतु</span>
+      <span class="brand-sub">DBS · न्यायसहायक</span>
+    </div>
+  </div>
+  <div class="header-badge">निःशुल्क सेवा</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🇮🇳 उत्तर प्रदेश सरकारी योजनाएं</div>
+    <h1>आपका <em>हक</em>,<br>आपकी जानकारी</h1>
+    <div class="hero-line"></div>
+    <p>बिना दलाल के, बिना पैसे के — सरकारी योजनाओं की सच्ची जानकारी हिंदी में</p>
+    <div class="hero-promise">
+      <span class="promise-chip">✓ निःशुल्क</span>
+      <span class="promise-chip">✓ हिंदी में</span>
+      <span class="promise-chip">✓ बिना Login</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="tabs">
+  <button class="tab active" onclick="showTab('finder', this)">🔍 योजना खोजें</button>
+  <button class="tab" onclick="showTab('schemes', this)">📋 सभी योजनाएं</button>
+  <button class="tab" onclick="showTab('alerts', this)">🔔 अलर्ट</button>
+</div>
+
+<!-- ══════════ FINDER SECTION ══════════ -->
+<div class="section active" id="sec-finder">
+  <p class="sec-title">अपनी योजना खोजें</p>
+  <p class="sec-sub">3 सवालों का जवाब दें — हम बताएंगे आपके लिए कौन सी योजना है</p>
+
+  <!-- Step Bar -->
+  <div class="step-bar">
+    <div class="step-node active" id="sn1">1</div>
+    <div class="step-track" id="st1"></div>
+    <div class="step-node" id="sn2">2</div>
+    <div class="step-track" id="st2"></div>
+    <div class="step-node" id="sn3">3</div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="q1">
+    <div class="q-step-label">सवाल 1 / 3</div>
+    <div class="q-text">आप कौन हैं?</div>
+    <div class="opts">
+      <button class="opt" onclick="pickQ1('student')">
+        <span class="opt-icon">📚</span>
+        <span class="opt-label">छात्र / छात्रा</span>
+        <span class="opt-hint">कक्षा 9 से आगे</span>
+      </button>
+      <button class="opt" onclick="pickQ1('elderly')">
+        <span class="opt-icon">👴</span>
+        <span class="opt-label">60+ बुजुर्ग</span>
+        <span class="opt-hint">वृद्धावस्था पेंशन</span>
+      </button>
+      <button class="opt" onclick="pickQ1('widow')">
+        <span class="opt-icon">🙏</span>
+        <span class="opt-label">विधवा महिला</span>
+        <span class="opt-hint">पति नहीं रहे</span>
+      </button>
+      <button class="opt" onclick="pickQ1('disabled')">
+        <span class="opt-icon">♿</span>
+        <span class="opt-label">दिव्यांग</span>
+        <span class="opt-hint">40%+ विकलांगता</span>
+      </button>
+      <button class="opt" onclick="pickQ1('parent')">
+        <span class="opt-icon">👧</span>
+        <span class="opt-label">बेटी के माता-पिता</span>
+        <span class="opt-hint">नवजात बेटी</span>
+      </button>
+      <button class="opt" onclick="showTab('schemes', document.querySelectorAll('.tab')[1])">
+        <span class="opt-icon">📋</span>
+        <span class="opt-label">सब देखना है</span>
+        <span class="opt-hint">सभी योजनाएं</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2" style="display:none">
+    <div class="q-step-label">सवाल 2 / 3</div>
+    <div class="q-text">आपकी जाति श्रेणी?</div>
+    <div class="opts">
+      <button class="opt" onclick="pickQ2('SC')"><span class="opt-icon">🏷️</span><span class="opt-label">SC</span><span class="opt-hint">अनुसूचित जाति</span></button>
+      <button class="opt" onclick="pickQ2('ST')"><span class="opt-icon">🏷️</span><span class="opt-label">ST</span><span class="opt-hint">अनुसूचित जनजाति</span></button>
+      <button class="opt" onclick="pickQ2('OBC')"><span class="opt-icon">🏷️</span><span class="opt-label">OBC</span><span class="opt-hint">पिछड़ा वर्ग</span></button>
+      <button class="opt" onclick="pickQ2('General')"><span class="opt-icon">🏷️</span><span class="opt-label">सामान्य / EWS</span><span class="opt-hint">General category</span></button>
+      <button class="opt" onclick="pickQ2('Minority')"><span class="opt-icon">🏷️</span><span class="opt-label">अल्पसंख्यक</span><span class="opt-hint">Minority</span></button>
+      <button class="opt" onclick="pickQ2('Unknown')"><span class="opt-icon">❓</span><span class="opt-label">पता नहीं</span><span class="opt-hint">Skip करें</span></button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q3" style="display:none">
+    <div class="q-step-label">सवाल 3 / 3</div>
+    <div class="q-text">परिवार की सालाना आय?</div>
+    <div class="opts">
+      <button class="opt" onclick="pickQ3('u1')"><span class="opt-icon">💰</span><span class="opt-label">₹1 लाख से कम</span></button>
+      <button class="opt" onclick="pickQ3('1to2')"><span class="opt-icon">💰</span><span class="opt-label">₹1–2 लाख</span></button>
+      <button class="opt" onclick="pickQ3('2to3')"><span class="opt-icon">💰</span><span class="opt-label">₹2–3 लाख</span></button>
+      <button class="opt" onclick="pickQ3('a3')"><span class="opt-icon">💰</span><span class="opt-label">₹3 लाख से अधिक</span></button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="finder-result"></div>
+</div>
+
+<!-- ══════════ SCHEMES SECTION ══════════ -->
+<div class="section" id="sec-schemes">
+  <p class="sec-title">5 प्रमुख योजनाएं</p>
+  <p class="sec-sub">उत्तर प्रदेश की सबसे जरूरी कल्याण योजनाएं — क्लिक करके पूरी जानकारी पाएं</p>
+  <div id="schemes-list"></div>
+  <div class="footer-note">
+    सभी जानकारी आधिकारिक UP सरकार पोर्टल से ली गई है।<br>
+    आवेदन हमेशा <strong>official portal</strong> पर ही करें।
+  </div>
+</div>
+
+<!-- ══════════ ALERTS SECTION ══════════ -->
+<div class="section" id="sec-alerts">
+  <p class="sec-title">महत्वपूर्ण अलर्ट</p>
+  <p class="sec-sub">Deadline और जरूरी तारीखें जो भूलनी नहीं हैं</p>
+
+  <div class="alert-card">
+    <div class="alert-head">
+      <div class="urgency high"></div>
+      <div class="alert-scheme">UP Scholarship — नई Registration</div>
+      <div class="alert-date" style="background:var(--red-lite);color:var(--red)">जुलाई–अगस्त 2026</div>
+    </div>
+    <div class="alert-body">
+      <p class="alert-desc">Pre-Matric (Class 9-10) और Post-Matric (11+) दोनों की fresh application window जुलाई में खुलेगी। अभी से OTR नंबर बनाएं और बैंक Aadhaar-link जांचें।</p>
+      <a class="alert-link" href="https://scholarship.up.gov.in" target="_blank">→ scholarship.up.gov.in</a>
+    </div>
+  </div>
+
+  <div class="alert-card">
+    <div class="alert-head">
+      <div class="urgency mid"></div>
+      <div class="alert-scheme">कन्या सुमंगला — Phase Deadline</div>
+      <div class="alert-date" style="background:var(--gold-lite);color:var(--gold)">31 जुलाई 2026</div>
+    </div>
+    <div class="alert-body">
+      <p class="alert-desc">हर Phase की अंतिम तिथि 31 जुलाई या प्रवेश के 45 दिन बाद। नए class में admission होते ही आवेदन करें — देर न करें।</p>
+      <a class="alert-link" href="https://mksy.up.gov.in" target="_blank">→ mksy.up.gov.in</a>
+    </div>
+  </div>
+
+  <div class="alert-card">
+    <div class="alert-head">
+      <div class="urgency low"></div>
+      <div class="alert-scheme">पेंशन — तिमाही भुगतान</div>
+      <div class="alert-date" style="background:var(--green-lite);color:var(--green)">हर 3 महीने</div>
+    </div>
+    <div class="alert-body">
+      <p class="alert-desc">वृद्धावस्था, विधवा, दिव्यांग — तीनों पेंशन तिमाही आती है। अप्रैल, जुलाई, अक्टूबर, जनवरी में बैंक जांचें। नहीं आई तो PFMS check करें।</p>
+      <a class="alert-link" href="https://sspy-up.gov.in" target="_blank">→ sspy-up.gov.in</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <p class="sec-title" style="font-size:16px;margin-bottom:12px">⚠️ दलालों के जाल से बचें</p>
+
+  <div class="trap-section">
+    <div class="trap-title">🚨 ये गलतियाँ बिल्कुल मत करें</div>
+    <ul class="trap-list">
+      <li>किसी को भी पैसे न दें — आवेदन पूरी तरह निःशुल्क है</li>
+      <li>upscholarship.com जैसी FAKE websites से बचें — सही साइट है scholarship.up.gov.in</li>
+      <li>Aadhaar नंबर या बैंक नंबर किसी cyber cafe वाले को न दें</li>
+      <li>WhatsApp पर आए "scholarship link" को official portal पर verify करें</li>
+      <li>"Guaranteed approval" का दावा करने वाला कोई सरकारी एजेंट नहीं होता</li>
+      <li>500-1000 रुपये लेकर form भरने वाले agents से बचें</li>
+    </ul>
+  </div>
+
+  <div class="complaint-box">
+    <div class="complaint-title">✅ शिकायत कैसे करें?</div>
+    <p class="complaint-text">
+      CM Helpline: <a href="https://jansunwai.up.nic.in" target="_blank">jansunwai.up.nic.in</a><br>
+      PFMS Helpline: <strong>1800-118-998</strong> (24x7 निःशुल्क)<br>
+      Scholarship: <strong>0522-2237498</strong> (सोम–शनि, 10am–6pm)<br>
+      Pension: <strong>1800-419-0001</strong> (निःशुल्क)
+    </p>
+  </div>
+
+  <div class="footer-note mt16">
+    Labharti Setu — <a href="https://nyaysahayak.co.in">DBS · न्यायसहायक</a><br>
+    यह सेवा पूरी तरह निःशुल्क है। कोई विज्ञापन नहीं। कोई एजेंट नहीं।
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="bnav active" onclick="showTabNav('finder', this)">
+    <span class="bnav-icon">🔍</span>
+    <span class="bnav-label">खोजें</span>
+  </button>
+  <button class="bnav" onclick="showTabNav('schemes', this)">
+    <span class="bnav-icon">📋</span>
+    <span class="bnav-label">योजनाएं</span>
+  </button>
+  <button class="bnav" onclick="showTabNav('alerts', this)">
+    <span class="bnav-icon">🔔</span>
+    <span class="bnav-label">अलर्ट</span>
+  </button>
+</nav>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────
+const DATA = {
+  student: {
+    name: 'उत्तर प्रदेश छात्रवृत्ति योजना',
+    icon: '📚',
+    dept: 'समाज कल्याण / पिछड़ा वर्ग / अल्पसंख्यक कल्याण विभाग',
+    amt: 'शिक्षण शुल्क + रखरखाव भत्ता',
+    freq: 'सीधे बैंक खाते में',
+    portal: 'https://scholarship.up.gov.in',
+    helpline: '0522-2237498',
+    eligibility: [
+      'UP का स्थायी निवासी छात्र/छात्रा',
+      'Pre-Matric: कक्षा 9–10 | Post-Matric: कक्षा 11 से स्नातकोत्तर',
+      'SC/ST Post-Matric: कोई आय सीमा नहीं',
+      'OBC / General / EWS / Minority: वार्षिक आय ₹2 लाख से कम',
+    ],
+    docs: [
+      'आधार कार्ड (अनिवार्य)',
+      'निवास प्रमाण पत्र',
+      'जाति प्रमाण पत्र (SC/ST/OBC/Minority)',
+      'आय प्रमाण पत्र (तहसीलदार से)',
+      'पिछली कक्षा की मार्कशीट',
+      'बैंक पासबुक (आधार-लिंक, खुद के नाम पर)',
+      'शुल्क रसीद — सटीक राशि भरें',
+      'पासपोर्ट साइज फोटो',
+    ],
+    video: 'UP Scholarship 2026: आवेदन कैसे करें | DBS Sarathi',
+    videoUrl: 'https://youtube.com/@DBSSarathi',
+    warning: 'Correction Window सिर्फ 3–5 दिन मिलती है — आवेदन के बाद रोज status जांचें।',
+    ok: (cat, inc) => inc !== 'a3' || cat === 'SC' || cat === 'ST',
+  },
+  elderly: {
+    name: 'वृद्धावस्था पेंशन योजना',
+    icon: '👴',
+    dept: 'समाज कल्याण विभाग, उत्तर प्रदेश',
+    amt: '₹1,000 प्रति माह',
+    freq: 'तिमाही ₹3,000 — DBT द्वारा',
+    portal: 'https://sspy-up.gov.in',
+    helpline: '1800-419-0001',
+    eligibility: [
+      'उत्तर प्रदेश का स्थायी निवासी',
+      'आयु 60 वर्ष या उससे अधिक',
+      'ग्रामीण: वार्षिक आय ₹46,080 से कम',
+      'शहरी: वार्षिक आय ₹56,460 से कम',
+      'परिवार में कोई सरकारी नौकरी या पेंशन न हो',
+    ],
+    docs: [
+      'आधार कार्ड',
+      'आयु प्रमाण (जन्म / वोटर कार्ड / स्कूल सर्टिफिकेट)',
+      'निवास प्रमाण पत्र',
+      'आय प्रमाण पत्र',
+      'बैंक पासबुक (आधार-लिंक)',
+      'पासपोर्ट साइज फोटो',
+    ],
+    video: 'वृद्धावस्था पेंशन: Online आवेदन | DBS Sarathi',
+    videoUrl: 'https://youtube.com/@DBSSarathi',
+    warning: 'हर 3 महीने में पेंशन आती है। नहीं आई तो sspy-up.gov.in और PFMS दोनों जांचें।',
+    ok: () => true,
+  },
+  widow: {
+    name: 'निराश्रित महिला (विधवा) पेंशन',
+    icon: '🙏',
+    dept: 'महिला कल्याण विभाग, उत्तर प्रदेश',
+    amt: '₹1,000 प्रति माह',
+    freq: 'तिमाही ₹3,000 — DBT द्वारा',
+    portal: 'https://sspy-up.gov.in',
+    helpline: '1800-419-0001',
+    eligibility: [
+      'उत्तर प्रदेश की स्थायी निवासी',
+      'पति का निधन हो चुका हो',
+      'आयु 18 से 60 वर्ष (60+ पर वृद्धा पेंशन के लिए आवेदन करें)',
+      'पुनर्विवाह न किया हो',
+      'वार्षिक आय ₹2 लाख से कम',
+    ],
+    docs: [
+      'आधार कार्ड',
+      'पति का मृत्यु प्रमाण पत्र (ग्राम पंचायत / नगर पालिका / तहसील)',
+      'निवास प्रमाण पत्र',
+      'आय प्रमाण पत्र',
+      'बैंक पासबुक — महिला के नाम पर, आधार-लिंक',
+      'पासपोर्ट साइज फोटो',
+    ],
+    video: 'विधवा पेंशन 2026: आवेदन प्रक्रिया | DBS Sarathi',
+    videoUrl: 'https://youtube.com/@DBSSarathi',
+    warning: 'बैंक खाता महिला के अपने नाम पर होना अनिवार्य है। किसी और के नाम पर नहीं चलेगा।',
+    ok: (cat, inc) => inc !== 'a3',
+  },
+  disabled: {
+    name: 'दिव्यांग एवं कुष्ठ रोग पेंशन',
+    icon: '♿',
+    dept: 'समाज कल्याण विभाग, उत्तर प्रदेश',
+    amt: '₹1,000/माह (दिव्यांग) · ₹2,500/माह (कुष्ठ)',
+    freq: 'तिमाही DBT द्वारा',
+    portal: 'https://sspy-up.gov.in',
+    helpline: '1800-419-0001',
+    eligibility: [
+      'उत्तर प्रदेश का स्थायी निवासी',
+      '40% या उससे अधिक विकलांगता (CMO प्रमाण पत्र)',
+      'आयु 18 वर्ष या उससे अधिक',
+      'वार्षिक आय ₹2 लाख से कम',
+      'एक समय में सिर्फ एक पेंशन योजना',
+    ],
+    docs: [
+      'आधार कार्ड',
+      'विकलांगता प्रमाण पत्र (जिला CMO से — 40%+)',
+      'UDID कार्ड (udid.gov.in — जल्दी approval मिलती है)',
+      'निवास प्रमाण पत्र',
+      'आय प्रमाण पत्र',
+      'बैंक पासबुक (आधार-लिंक)',
+      'पासपोर्ट साइज फोटो',
+    ],
+    video: 'दिव्यांग पेंशन + UDID Card कैसे बनाएं | DBS Sarathi',
+    videoUrl: 'https://youtube.com/@DBSSarathi',
+    warning: 'पहले UDID Card बनवाएं (udid.gov.in) — इससे pension approval जल्दी होती है।',
+    ok: (cat, inc) => inc !== 'a3',
+  },
+  parent: {
+    name: 'मुख्यमंत्री कन्या सुमंगला योजना',
+    icon: '👧',
+    dept: 'महिला एवं बाल विकास विभाग, उत्तर प्रदेश',
+    amt: '₹25,000 कुल (6 किस्तों में)',
+    freq: 'हर milestone पर DBT द्वारा',
+    portal: 'https://mksy.up.gov.in',
+    helpline: '1800-180-5070',
+    eligibility: [
+      'UP का स्थायी निवासी परिवार',
+      'वार्षिक आय ₹3 लाख से कम',
+      'परिवार में अधिकतम 2 बेटियाँ (जुड़वाँ में 3 तक)',
+      'गोद ली गई बेटी भी पात्र',
+      'Phase-1: जन्म के 6 महीने के अंदर आवेदन जरूरी',
+    ],
+    docs: [
+      'आधार कार्ड (माता/पिता का)',
+      'बेटी का जन्म प्रमाण पत्र',
+      'निवास प्रमाण पत्र',
+      'आय प्रमाण पत्र (₹3 लाख से कम)',
+      'बैंक पासबुक (माता/पिता, आधार-लिंक)',
+      'टीकाकरण कार्ड (Phase-2 के लिए)',
+      'प्रवेश प्रमाण पत्र (Phase 3-6 के लिए)',
+      'फोटो (बेटी + आवेदक)',
+    ],
+    video: 'कन्या सुमंगला: ₹25,000 कैसे पाएं | DBS Sarathi',
+    videoUrl: 'https://youtube.com/@DBSSarathi',
+    warning: 'जन्म के 6 महीने के अंदर Phase-1 आवेदन जरूरी है — देर हुई तो पहली किस्त नहीं मिलेगी।',
+    ok: (cat, inc) => inc !== 'a3',
+  },
+};
+
+// ── STATE ─────────────────────────────────────────────────────
+let A = { who: null, cat: null, inc: null };
+
+// ── TAB NAVIGATION ────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id === 'schemes') renderSchemes();
+}
+
+function showTabNav(id, btn) {
+  const tabMap = { finder: 0, schemes: 1, alerts: 2 };
+  const tabs = document.querySelectorAll('.tab');
+  showTab(id, tabs[tabMap[id]]);
+  document.querySelectorAll('.bnav').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── STEP HELPERS ──────────────────────────────────────────────
+function stepDone(n) {
+  document.getElementById('sn' + n).className = 'step-node done';
+  if (n < 3) document.getElementById('st' + n).className = 'step-track done';
+  if (n < 3) document.getElementById('sn' + (n+1)).className = 'step-node active';
+}
+
+function hide(id) { document.getElementById(id).style.display = 'none'; }
+function show(id) { document.getElementById(id).style.display = 'block'; }
+
+// ── QUESTION HANDLERS ─────────────────────────────────────────
+function pickQ1(who) {
+  A.who = who;
+  hide('q1'); stepDone(1);
+  show('q2');
+}
+function pickQ2(cat) {
+  A.cat = cat;
+  hide('q2'); stepDone(2);
+  show('q3');
+}
+function pickQ3(inc) {
+  A.inc = inc;
+  hide('q3'); stepDone(3);
+  renderResult();
+}
+
+// ── RESULT ────────────────────────────────────────────────────
+function renderResult() {
+  const s = DATA[A.who];
+  const el = document.getElementById('finder-result');
+  if (!s) return;
+
+  if (!s.ok(A.cat, A.inc)) {
+    el.innerHTML = `
+      <div class="ineligible-card">
+        <div class="ineligible-icon">ℹ️</div>
+        <div class="ineligible-title">आय सीमा से बाहर हो सकते हैं</div>
+        <p class="ineligible-text">
+          आपकी वार्षिक आय इस योजना की पात्रता सीमा से अधिक लग रही है।<br>
+          फिर भी एक बार official portal पर जाकर खुद जांचें — कभी-कभी नियम बदलते हैं।
+        </p>
+        <a class="btn-main" href="${s.portal}" target="_blank">Portal पर जांचें</a>
+        <button class="btn-ghost" onclick="resetFinder()">↩ फिर से खोजें</button>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="result-wrap">
+      <div class="result-top">
+        <div class="result-tag">✅ आपके लिए यह योजना है</div>
+        <div class="result-name">${s.icon} ${s.name}</div>
+        <div class="result-amt">
+          <span class="result-amt-num">${s.amt}</span>
+          <span class="result-amt-label">${s.freq}</span>
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="info-block">
+          <div class="info-block-label">विभाग</div>
+          <div class="info-block-val">${s.dept}</div>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">पात्रता शर्तें</div>
+          <ul class="dot-list">${s.eligibility.map(e => `<li>${e}</li>`).join('')}</ul>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">आवश्यक दस्तावेज</div>
+          <ul class="dot-list">${s.docs.map(d => `<li>${d}</li>`).join('')}</ul>
+        </div>
+        <div class="info-block">
+          <div class="info-block-label">हेल्पलाइन</div>
+          <div class="info-block-val">${s.helpline}</div>
+        </div>
+
+        <a class="video-btn" href="${s.videoUrl}" target="_blank">
+          <div class="play-circle">▶</div>
+          <div class="video-btn-text">
+            <div class="vt-tag">DBS Sarathi — Video Guide</div>
+            <div class="vt-title">${s.video}</div>
+          </div>
+        </a>
+
+        <div class="warn-box">
+          <div class="warn-icon">⚠️</div>
+          <div class="warn-text">${s.warning}</div>
+        </div>
+
+        <div class="action-row">
+          <a class="btn-main" href="${s.portal}" target="_blank">Apply करें</a>
+          <a class="btn-outline" href="https://jansunwai.up.nic.in" target="_blank">शिकायत</a>
+        </div>
+        <button class="btn-ghost" onclick="resetFinder()">↩ फिर से खोजें</button>
+      </div>
+    </div>`;
+}
+
+function resetFinder() {
+  A = { who: null, cat: null, inc: null };
+  ['q1','q2','q3'].forEach((id,i) => {
+    document.getElementById(id).style.display = i === 0 ? 'block' : 'none';
+  });
+  document.getElementById('finder-result').innerHTML = '';
+  document.getElementById('sn1').className = 'step-node active';
+  document.getElementById('sn2').className = 'step-node';
+  document.getElementById('sn3').className = 'step-node';
+  document.getElementById('st1').className = 'step-track';
+  document.getElementById('st2').className = 'step-track';
+}
+
+// ── SCHEME LIST ───────────────────────────────────────────────
+function renderSchemes() {
+  const keys = ['student','elderly','widow','disabled','parent'];
+  const tagMap = {
+    student:  ['छात्र/छात्रा', 'SC/ST/OBC/General'],
+    elderly:  ['60+ वर्ष', 'सभी वर्ग'],
+    widow:    ['विधवा महिला', '18–60 वर्ष'],
+    disabled: ['40%+ विकलांग', 'सभी वर्ग'],
+    parent:   ['नवजात बेटी', '₹3 लाख से कम आय'],
+  };
+  document.getElementById('schemes-list').innerHTML = keys.map(k => {
+    const s = DATA[k];
+    return `
+    <div class="scheme-card" onclick="openScheme('${k}')">
+      <div class="sc-head">
+        <div class="sc-icon">${s.icon}</div>
+        <div>
+          <div class="sc-title">${s.name}</div>
+          <div class="sc-dept">${s.dept}</div>
+        </div>
+      </div>
+      <div class="sc-amt">${s.amt}</div>
+      <div class="sc-foot">
+        <div class="sc-tags">
+          ${tagMap[k].map(t => `<span class="sc-tag">${t}</span>`).join('')}
+        </div>
+        <span class="sc-arrow">विवरण →</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openScheme(key) {
+  A.who = key;
+  A.cat = 'Unknown';
+  A.inc = 'u1';
+  showTabNav('finder', document.querySelector('.bnav'));
+  ['q1','q2','q3'].forEach(id => hide(id));
+  document.getElementById('sn1').className = 'step-node done';
+  document.getElementById('sn2').className = 'step-node done';
+  document.getElementById('sn3').className = 'step-node done';
+  document.getElementById('st1').className = 'step-track done';
+  document.getElementById('st2').className = 'step-track done';
+  renderResult();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+renderSchemes();
+</script>
+</body>
+</html>
