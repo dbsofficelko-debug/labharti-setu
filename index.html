@@ -23,7 +23,7 @@
   --hdr-h:       64px;
   --input-h:     60px;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body,div,section{max-width:100vw;}
 html,body{height:100%;overflow:hidden;}
 
 /* ── SHELL: WhatsApp full-screen ── */
@@ -267,10 +267,12 @@ body{
 /* ── INPUT BAR (fixed bottom) ── */
 .input-bar{
   flex-shrink:0;
+  width:100%;max-width:100%;overflow:hidden;
   background:var(--green-bg);
   padding:8px 10px;
   padding-bottom:max(8px, env(safe-area-inset-bottom));
   display:flex;align-items:flex-end;gap:8px;
+  box-sizing:border-box;
 }
 .input-box{
   flex:1;min-width:0;
