@@ -2,259 +2,422 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>लाभार्थी सेतु — सरकारी योजनाओं तक आपका पुल</title>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-dark: #1a4731;
-    --green-mid:  #2d6a4f;
-    --green-light:#52b788;
-    --green-pale: #e8f5ee;
-    --green-card: #f0f9f4;
-    --orange:     #F26522;
-    --text-dark:  #1a2e1a;
-    --text-mid:   #3d5a3d;
-    --text-light: #6b8f6b;
-    --white:      #ffffff;
-    --border:     #c3e0cc;
-    --radius:     14px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Baloo 2', sans-serif; background: var(--green-pale); color: var(--text-dark); min-height: 100vh; }
+:root {
+  --green-dark:  #1a4731;
+  --green-mid:   #2d6a4f;
+  --green-light: #52b788;
+  --green-pale:  #e8f5ee;
+  --green-card:  #f0f9f4;
+  --green-bg:    #dce8e0;
+  --orange:      #F26522;
+  --text-dark:   #1a2e1a;
+  --text-mid:    #3d5a3d;
+  --text-light:  #6b8f6b;
+  --white:       #ffffff;
+  --border:      #c3e0cc;
+  --radius:      14px;
+  --hdr-h:       64px;
+  --input-h:     60px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
 
-  header {
-    background: var(--green-dark); padding: 0 20px; height: 68px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  }
-  .logo-wrap { display: flex; align-items: center; gap: 12px; }
-  .logo-icon { width: 46px; height: 46px; background: var(--orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
-  .logo-text h1 { font-size: 1.25rem; font-weight: 800; color: var(--white); line-height: 1.1; }
-  .logo-text p { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
-  .back-btn { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); color: var(--white); padding: 8px 18px; border-radius: 50px; font-size: 0.82rem; font-family: 'Baloo 2', sans-serif; font-weight: 500; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
-  .back-btn:hover { background: rgba(255,255,255,0.22); }
+/* ── SHELL: WhatsApp full-screen ── */
+body{
+  font-family:'Baloo 2',sans-serif;
+  background:var(--green-bg);
+  display:flex;flex-direction:column;
+  height:100dvh;
+  overflow:hidden;
+}
 
-  .hero { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%); margin: 16px; border-radius: 18px; padding: 28px 24px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -30px; right: -30px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
-  .hero-greeting { font-size: 0.9rem; color: var(--orange); margin-bottom: 8px; font-weight: 700; }
-  .hero-title { font-size: 1.8rem; font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 8px; font-family: 'Tiro Devanagari Hindi', serif; }
-  .hero-sub { font-size: 0.88rem; color: rgba(255,255,255,0.75); margin-bottom: 18px; line-height: 1.5; }
-  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
-  .badge { background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.92); padding: 5px 12px; border-radius: 50px; font-size: 0.76rem; font-weight: 500; }
+/* ── HEADER (fixed) ── */
+.hdr{
+  flex-shrink:0;
+  height:var(--hdr-h);
+  background:var(--green-dark);
+  display:flex;align-items:center;
+  padding:0 14px;gap:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  z-index:10;
+}
+.hdr-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.hdr-text{flex:1;min-width:0;}
+.hdr-name{font-size:1rem;font-weight:700;color:#fff;line-height:1.1;}
+.hdr-sub{font-size:0.7rem;color:rgba(255,255,255,0.7);}
+.hdr-back{
+  background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);
+  color:#fff;padding:6px 14px;border-radius:50px;
+  font-size:0.75rem;font-family:'Baloo 2',sans-serif;
+  font-weight:600;text-decoration:none;white-space:nowrap;
+  transition:background 0.18s;
+}
+.hdr-back:hover{background:rgba(255,255,255,0.2);}
 
-  .section-head { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin: 20px 16px 10px; display: flex; align-items: center; gap: 8px; }
+/* ── SCROLL AREA (middle, fills remaining space) ── */
+.scroll-area{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background:var(--green-bg);
+  /* WhatsApp-style background */
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d6a4f' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  -webkit-overflow-scrolling:touch;
+}
+.scroll-area::-webkit-scrollbar{width:4px;}
+.scroll-area::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-  .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
-  .id-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 14px 16px; text-align: center; cursor: pointer; transition: all 0.22s ease; position: relative; }
-  .id-card:hover { border-color: var(--green-light); box-shadow: 0 4px 20px rgba(45,106,79,0.14); transform: translateY(-2px); }
-  .id-card.selected { border-color: var(--green-mid); background: var(--green-card); }
-  .id-card.selected::after { content: '✓'; position: absolute; top: 10px; right: 12px; width: 22px; height: 22px; background: var(--green-mid); color: white; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-  .id-emoji { font-size: 2.2rem; margin-bottom: 6px; display: block; }
-  .id-label { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); }
-  .id-desc { font-size: 0.73rem; color: var(--text-light); margin-top: 3px; }
+/* ── IDENTITY CHOOSER ── */
+.chooser{padding:16px 12px;}
+.chooser-title{
+  font-size:0.78rem;font-weight:700;
+  color:var(--green-dark);
+  text-align:center;
+  background:rgba(255,255,255,0.7);
+  border-radius:50px;padding:5px 16px;
+  display:inline-block;margin:0 auto 14px;
+  letter-spacing:0.3px;
+}
+.chooser-center{text-align:center;}
+.id-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  max-width:400px;margin:0 auto;
+}
+.id-card{
+  background:var(--white);
+  border:2px solid var(--border);border-radius:16px;
+  padding:18px 12px 14px;text-align:center;
+  cursor:pointer;transition:all 0.2s ease;
+  position:relative;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+.id-card:active{transform:scale(0.97);}
+.id-card.selected{border-color:var(--green-mid);background:var(--green-card);}
+.id-card.selected::after{
+  content:'✓';position:absolute;top:8px;right:10px;
+  width:20px;height:20px;background:var(--green-mid);color:#fff;
+  border-radius:50%;font-size:0.65rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.id-emoji{font-size:2rem;margin-bottom:6px;display:block;}
+.id-label{font-size:0.9rem;font-weight:700;color:var(--text-dark);}
+.id-desc{font-size:0.68rem;color:var(--text-light);margin-top:2px;}
 
-  .chat-wrap { margin: 0 16px 16px; display: none; }
-  .chat-wrap.visible { display: block; }
-  .chat-box { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .chat-header { background: var(--green-dark); padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
-  .chat-header-ico { font-size: 1.4rem; }
-  .chat-header-text h3 { font-size: 0.92rem; font-weight: 700; color: var(--white); }
-  .chat-header-text p { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
-  .chat-live { display: flex; align-items: center; gap: 5px; margin-left: auto; font-size: 0.72rem; color: #4ade80; font-weight: 600; }
-  .live-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: livePulse 1.5s infinite; }
-  @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+/* ── CHAT MESSAGES AREA ── */
+.msgs-area{
+  padding:12px 10px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.date-pill{
+  text-align:center;margin:8px 0;
+}
+.date-pill span{
+  background:rgba(255,255,255,0.75);
+  font-size:0.68rem;color:var(--text-mid);
+  padding:3px 12px;border-radius:50px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.06);
+}
 
-  .chat-msgs { padding: 16px; background: var(--green-pale); min-height: 220px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-  .chat-msgs::-webkit-scrollbar { width: 4px; }
-  .chat-msgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+/* ── BUBBLES: WhatsApp exact style ── */
+.msg-row{display:flex;margin:2px 0;align-items:flex-end;gap:6px;}
+.msg-row.bot{justify-content:flex-start;padding-right:48px;}
+.msg-row.user{justify-content:flex-end;padding-left:48px;}
 
-  .msg-row { display: flex; }
-  .msg-row.bot { justify-content: flex-start; }
-  .msg-row.user { justify-content: flex-end; }
-  .bubble { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 0.85rem; line-height: 1.65; font-family: 'Baloo 2', sans-serif; word-break: break-word; overflow-wrap: break-word; }
-  .msg-row.bot .bubble { background: var(--white); color: var(--text-dark); border: 1px solid var(--border); border-bottom-left-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); white-space: pre-wrap; }
-  .msg-row.user .bubble { background: var(--green-dark); color: white; border-bottom-right-radius: 4px; }
+.bot-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--green-mid);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;align-self:flex-end;
+}
 
-  .typing { display: flex; gap: 5px; align-items: center; }
-  .typing span { width: 7px; height: 7px; background: var(--text-light); border-radius: 50%; animation: bounce 0.9s infinite; }
-  .typing span:nth-child(2) { animation-delay: 0.15s; }
-  .typing span:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes bounce { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-6px);opacity:1} }
+.bubble{
+  max-width:78%;padding:8px 12px;
+  border-radius:18px;
+  font-size:0.84rem;line-height:1.6;
+  font-family:'Baloo 2',sans-serif;
+  word-break:break-word;overflow-wrap:break-word;
+  position:relative;
+}
+/* Bot bubble: WhatsApp left tail */
+.msg-row.bot .bubble{
+  background:#fff;
+  color:var(--text-dark);
+  border-bottom-left-radius:4px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.1);
+  white-space:pre-wrap;
+}
+/* User bubble: WhatsApp right tail green */
+.msg-row.user .bubble{
+  background:#dcf8c6;
+  color:#1a2e1a;
+  border-bottom-right-radius:4px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.1);
+}
+.bubble a{color:var(--green-mid);text-decoration:underline;word-break:break-all;}
 
-  .quick-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .qchip { background: var(--green-pale); border: 1.5px solid var(--border); color: var(--green-dark); padding: 6px 12px; border-radius: 50px; font-size: 0.78rem; font-family: 'Baloo 2', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.18s; }
-  .qchip:hover { background: var(--green-mid); border-color: var(--green-mid); color: white; }
+/* Timestamp in bubble */
+.bubble-time{
+  font-size:0.62rem;color:rgba(0,0,0,0.35);
+  text-align:right;margin-top:2px;
+}
 
-  .chat-input-wrap { padding: 10px 12px; background: var(--white); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-end; overflow: hidden; }
-  .chat-input { flex: 1; min-width: 0; border: 1.5px solid var(--border); border-radius: 10px; padding: 9px 12px; font-size: 0.88rem; font-family: 'Baloo 2', sans-serif; color: var(--text-dark); background: var(--green-pale); outline: none; resize: none; max-height: 100px; line-height: 1.5; transition: border 0.18s; }
-  .chat-input:focus { border-color: var(--green-mid); background: white; }
-  .chat-input::placeholder { color: var(--text-light); }
-  .send-btn { width: 40px; height: 40px; background: var(--green-dark); border: none; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; flex-shrink: 0; transition: all 0.18s; }
-  .send-btn:hover { background: var(--green-mid); }
-  .send-btn:disabled { background: var(--border); cursor: not-allowed; }
+/* Action row below bot bubble */
+.act-row{
+  display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;
+}
+.act-btn{
+  background:none;border:1px solid var(--border);
+  border-radius:50px;cursor:pointer;
+  font-size:0.72rem;color:var(--text-mid);
+  padding:3px 10px;font-family:'Baloo 2',sans-serif;
+  transition:all 0.15s;
+}
+.act-btn:hover{border-color:var(--green-mid);color:var(--green-dark);}
+.act-emoji{background:none;border:none;cursor:pointer;font-size:15px;padding:2px 3px;}
 
-  .prarup-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px; border-left: 4px solid var(--orange); animation: fadeUp 0.35s ease both; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-  .prarup-card-title { font-size: 0.95rem; font-weight: 700; color: var(--green-dark); margin-bottom: 6px; }
-  .prarup-card-desc { font-size: 0.82rem; color: var(--text-mid); margin-bottom: 10px; }
-  .prarup-actions-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pact-btn { padding: 8px 16px; border-radius: 50px; font-size: 0.78rem; font-family: 'Baloo 2', sans-serif; font-weight: 700; cursor: pointer; border: none; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all 0.18s; }
-  .pact-primary { background: var(--orange); color: white; }
-  .pact-primary:hover { background: #d4541a; }
-  .pact-green { background: var(--green-mid); color: white; }
-  .pact-green:hover { background: var(--green-dark); }
-  .pact-warn { background: #fff3e0; color: #e65100; border: 1.5px solid #ffcc80; }
+/* Typing dots */
+.typing{display:flex;gap:5px;align-items:center;padding:4px 2px;}
+.typing span{
+  width:7px;height:7px;background:var(--text-light);
+  border-radius:50%;animation:bounce 0.9s infinite;
+}
+.typing span:nth-child(2){animation-delay:0.15s;}
+.typing span:nth-child(3){animation-delay:0.3s;}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-5px);opacity:1}}
 
-  .feedback-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.78rem; color: var(--text-light); }
-  .fb-btn { background: none; border: 1.5px solid var(--border); border-radius: 50px; padding: 4px 12px; font-size: 0.78rem; cursor: pointer; font-family: 'Baloo 2', sans-serif; transition: all 0.18s; }
-  .fb-btn:hover { border-color: var(--green-mid); color: var(--green-mid); }
+/* ── PRARUP CARD ── */
+.prarup-card{
+  background:#fff;border-left:4px solid var(--orange);
+  border-radius:12px;padding:14px;margin:6px 0;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  animation:fadeUp 0.3s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.prarup-title{font-size:0.88rem;font-weight:700;color:var(--green-dark);margin-bottom:5px;}
+.prarup-desc{font-size:0.76rem;color:var(--text-mid);margin-bottom:10px;}
+.prarup-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.pact-btn{
+  padding:7px 14px;border-radius:50px;
+  font-size:0.76rem;font-family:'Baloo 2',sans-serif;
+  font-weight:700;cursor:pointer;border:none;
+  text-decoration:none;display:inline-flex;align-items:center;gap:4px;
+  transition:all 0.15s;
+}
+.pact-primary{background:var(--orange);color:#fff;}
+.pact-primary:hover{background:#d4541a;}
+.pact-green{background:var(--green-mid);color:#fff;}
+.pact-green:hover{background:var(--green-dark);}
+.pact-warn{background:#fff3e0;color:#e65100;border:1.5px solid #ffcc80;}
 
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; align-items: flex-end; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: white; border-radius: 18px 18px 0 0; width: 100%; max-width: 860px; max-height: 88vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s cubic-bezier(.4,0,.2,1); }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 0; flex-shrink: 0; }
-  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-  .modal-title { font-size: 1rem; font-weight: 700; color: var(--green-dark); }
-  .modal-close { background: var(--green-pale); border: none; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; color: var(--text-light); display: flex; align-items: center; justify-content: center; }
-  .modal-close:hover { background: var(--border); }
-  .modal-body { flex: 1; overflow-y: auto; padding: 16px 18px 24px; }
-  .prarup-text { font-family: 'Baloo 2', sans-serif; font-size: 0.88rem; line-height: 1.9; color: var(--text-dark); background: #fafff9; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 14px; white-space: pre-wrap; }
-  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-  .copy-btn { flex: 1; padding: 12px; background: var(--green-dark); color: white; border: none; border-radius: 10px; font-size: 0.9rem; font-family: 'Baloo 2', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-  .copy-btn:hover { background: var(--green-mid); }
-  .wa-btn { padding: 12px 18px; background: #25D366; color: white; border: none; border-radius: 10px; font-size: 0.9rem; font-family: 'Baloo 2', sans-serif; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+/* ── ESCALATION LADDER ── */
+.esc-card{
+  background:#fff;border-radius:12px;padding:14px;
+  margin:6px 0;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  animation:fadeUp 0.3s ease both;
+}
+.esc-title{font-size:0.85rem;font-weight:700;color:var(--green-dark);margin-bottom:10px;}
+.esc-step{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:8px 0;border-bottom:1px dashed var(--border);
+}
+.esc-step:last-child{border-bottom:none;}
+.esc-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--green-mid);color:#fff;
+  font-size:0.65rem;font-weight:700;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.esc-num.red{background:#dc2626;}
+.esc-num.orange{background:#d97706;}
+.esc-content{flex:1;min-width:0;}
+.esc-authority{font-weight:700;color:var(--text-dark);font-size:0.78rem;}
+.esc-deadline{font-size:0.68rem;color:var(--text-light);margin-top:2px;}
+.esc-action-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--green-pale);border:1px solid var(--border);
+  color:var(--green-dark);padding:4px 10px;border-radius:50px;
+  font-size:0.68rem;font-family:'Baloo 2',sans-serif;
+  font-weight:600;cursor:pointer;margin-top:5px;margin-right:4px;
+  text-decoration:none;transition:all 0.15s;
+}
+.esc-action-btn:hover{background:var(--green-mid);color:#fff;border-color:var(--green-mid);}
 
-  .reset-btn { display: flex; align-items: center; justify-content: center; gap: 6px; width: calc(100% - 32px); margin: 8px 16px 24px; background: none; border: 1.5px solid var(--border); color: var(--text-light); padding: 12px; border-radius: var(--radius); font-size: 0.85rem; font-family: 'Baloo 2', sans-serif; cursor: pointer; transition: all 0.18s; }
-  .reset-btn:hover { border-color: var(--green-light); color: var(--green-mid); }
+/* ── RESET ── */
+.reset-wrap{text-align:center;padding:10px 16px 20px;}
+.reset-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:none;border:1.5px solid var(--border);
+  color:var(--text-light);padding:10px 24px;
+  border-radius:50px;font-size:0.82rem;
+  font-family:'Baloo 2',sans-serif;cursor:pointer;
+  transition:all 0.15s;
+}
+.reset-btn:hover{border-color:var(--green-mid);color:var(--green-mid);}
 
-  footer { background: var(--green-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 16px; font-size: 0.75rem; line-height: 1.6; }
-  footer strong { color: rgba(255,255,255,0.9); }
-  .divider { height: 1px; background: var(--border); margin: 4px 16px 0; }
+/* ── INPUT BAR (fixed bottom) ── */
+.input-bar{
+  flex-shrink:0;
+  background:var(--green-bg);
+  padding:8px 10px;
+  padding-bottom:max(8px, env(safe-area-inset-bottom));
+  display:flex;align-items:flex-end;gap:8px;
+}
+.input-box{
+  flex:1;min-width:0;
+  background:#fff;
+  border:none;border-radius:24px;
+  padding:10px 16px;
+  font-size:0.88rem;
+  font-family:'Baloo 2',sans-serif;
+  color:var(--text-dark);
+  outline:none;resize:none;
+  max-height:120px;line-height:1.5;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+.input-box::placeholder{color:var(--text-light);}
+.send-btn{
+  width:44px;height:44px;flex-shrink:0;
+  background:var(--green-mid);border:none;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.1rem;
+  box-shadow:0 2px 8px rgba(45,106,79,0.4);
+  transition:all 0.15s;
+}
+.send-btn:hover{background:var(--green-dark);transform:scale(1.05);}
+.send-btn:active{transform:scale(0.95);}
+.send-btn:disabled{background:var(--border);color:#aaa;cursor:not-allowed;box-shadow:none;transform:none;}
 
-  .escalation-ladder {
-    background: var(--white); border: 1.5px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px; margin-top: 8px;
-    animation: fadeUp 0.35s ease both;
-  }
-  .escalation-title { font-size: 0.88rem; font-weight: 700; color: var(--green-dark); margin-bottom: 10px; }
-  .esc-step {
-    display: flex; gap: 10px; align-items: flex-start;
-    padding: 8px 0; border-bottom: 1px dashed var(--border);
-    font-size: 0.8rem; color: var(--text-mid);
-  }
-  .esc-step:last-child { border-bottom: none; }
-  .esc-num {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--green-mid); color: white;
-    font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .esc-num.red { background: #dc2626; }
-  .esc-num.orange { background: #d97706; }
-  .esc-content { flex: 1; }
-  .esc-authority { font-weight: 700; color: var(--text-dark); font-size: 0.82rem; }
-  .esc-deadline { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
-  .esc-action-btn {
-    display: inline-flex; align-items: center; gap: 4px;
-    background: var(--green-pale); border: 1px solid var(--border);
-    color: var(--green-dark); padding: 4px 10px; border-radius: 50px;
-    font-size: 0.72rem; font-family: 'Baloo 2', sans-serif;
-    font-weight: 600; cursor: pointer; margin-top: 4px;
-    transition: all 0.15s;
-  }
-  .esc-action-btn:hover { background: var(--green-mid); color: white; border-color: var(--green-mid); }
+/* ── MODAL (PRARUP VIEWER) ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.55);z-index:200;
+  align-items:flex-end;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-width:860px;max-height:88dvh;
+  display:flex;flex-direction:column;
+  transform:translateY(100%);
+  transition:transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;flex-shrink:0;}
+.modal-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.modal-title{font-size:0.95rem;font-weight:700;color:var(--green-dark);}
+.modal-close{
+  background:var(--green-pale);border:none;cursor:pointer;
+  width:28px;height:28px;border-radius:50%;
+  font-size:0.9rem;color:var(--text-light);
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-body{flex:1;overflow-y:auto;padding:16px 18px 24px;}
+.prarup-text{
+  font-family:'Baloo 2',sans-serif;font-size:0.86rem;line-height:1.9;
+  color:var(--text-dark);background:#fafff9;
+  border:1px solid var(--border);border-radius:10px;
+  padding:16px;margin-bottom:14px;white-space:pre-wrap;
+}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.copy-btn{
+  flex:1;padding:12px;background:var(--green-dark);color:#fff;
+  border:none;border-radius:10px;font-size:0.88rem;
+  font-family:'Baloo 2',sans-serif;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.wa-btn{
+  padding:12px 16px;background:#25D366;color:#fff;
+  border:none;border-radius:10px;font-size:0.88rem;
+  font-family:'Baloo 2',sans-serif;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-wrap">
-    <div class="logo-icon">🌉</div>
-    <div class="logo-text">
-      <h1>लाभार्थी सेतु</h1>
-      <p>सरकारी योजनाओं तक आपका पुल</p>
-    </div>
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-icon">🙏</div>
+  <div class="hdr-text">
+    <div class="hdr-name">लाभार्थी सेतु</div>
+    <div class="hdr-sub" id="hdrSub">सरकारी योजनाओं तक आपका पुल</div>
   </div>
-  <a href="https://nyaysahayak.co.in" class="back-btn">← न्यायसहायक</a>
-</header>
-
-<!-- BETA BANNER -->
-<div id="betaBanner" style="background:linear-gradient(135deg,#166534,#15803d);color:white;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-family:Baloo 2,sans-serif;">
-  <span>🧪 <strong>बीटा चरण</strong> — निःशुल्क | आपकी प्रतिक्रिया हमें बेहतर बनाएगी</span>
-  <button onclick="document.getElementById('betaBanner').style.display='none'" style="background:rgba(255,255,255,0.2);border:none;color:white;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:12px;margin-left:8px;">✕</button>
-</div>
-<div class="hero">
-  <p class="hero-greeting">🙏 नमस्ते! लाभार्थी सेतु में आपका स्वागत है</p>
-  <h2 class="hero-title">आपकी सहायता,<br>हमारा दायित्व</h2>
-  <p class="hero-sub">सही योजना · सही दस्तावेज़ · तैयार प्रारूप — बिना दलाल के</p>
-  <div class="hero-badges">
-    <span class="badge">🆓 निःशुल्क</span>
-    <span class="badge">🤖 AI सहायक</span>
-    <span class="badge">📋 प्रारूप तैयार</span>
-    <span class="badge">🔗 Direct Portal</span>
-  </div>
+  <a href="https://nyaysahayak.co.in" class="hdr-back">← न्यायसहायक</a>
 </div>
 
-<div id="step1">
-  <p class="section-head">👤 आप कौन हैं? (चुनें)</p>
-  <div class="identity-grid">
-    <div class="id-card" onclick="startChat(this,'vidhwa','विधवा','👩')">
-      <span class="id-emoji">👩</span>
-      <div class="id-label">विधवा</div>
-      <div class="id-desc">पति की मृत्यु हुई है</div>
-    </div>
-    <div class="id-card" onclick="startChat(this,'vriddha','वृद्ध/वृद्धा','👴')">
-      <span class="id-emoji">👴</span>
-      <div class="id-label">वृद्ध/वृद्धा</div>
-      <div class="id-desc">60+ वर्ष आयु</div>
-    </div>
-    <div class="id-card" onclick="startChat(this,'divyang','दिव्यांगजन','♿')">
-      <span class="id-emoji">♿</span>
-      <div class="id-label">दिव्यांगजन</div>
-      <div class="id-desc">40%+ विकलांगता</div>
-    </div>
-    <div class="id-card" onclick="startChat(this,'parivar','परिवार/अन्य','👨‍👩‍👧')">
-      <span class="id-emoji">👨‍👩‍👧</span>
-      <div class="id-label">परिवार/अन्य</div>
-      <div class="id-desc">राशन · आवास · बीमा</div>
-    </div>
-    <div class="id-card" onclick="startChat(this,'retired','सेवानिवृत्त कर्मचारी','👨‍💼')">
-      <span class="id-emoji">👨‍💼</span>
-      <div class="id-label">सेवानिवृत्त</div>
-      <div class="id-desc">Gratuity · Pension · GPF</div>
-    </div>
-  </div>
-</div>
+<!-- SCROLL AREA -->
+<div class="scroll-area" id="scrollArea">
 
-<div class="divider" style="margin-top:20px;"></div>
-
-<div class="chat-wrap" id="chatWrap">
-  <p class="section-head" id="chatHead">💬 AI सहायक</p>
-  <div class="chat-box">
-    <div class="chat-header">
-      <span class="chat-header-ico">🤖</span>
-      <div class="chat-header-text">
-        <h3>लाभार्थी AI सहायक</h3>
-        <p>आपकी समस्या समझेगा — योजना + प्रारूप देगा</p>
+  <!-- IDENTITY CHOOSER -->
+  <div class="chooser" id="chooser">
+    <div class="chooser-center">
+      <div class="chooser-title">👤 आप कौन हैं? एक चुनें</div>
+    </div>
+    <div class="id-grid">
+      <div class="id-card" onclick="startChat(this,'vidhwa','विधवा','👩')">
+        <span class="id-emoji">👩</span>
+        <div class="id-label">विधवा</div>
+        <div class="id-desc">पति की मृत्यु हुई है</div>
       </div>
-      <div class="chat-live"><div class="live-dot"></div>Live</div>
-    </div>
-    <div class="chat-msgs" id="chatMsgs"></div>
-    <div class="chat-input-wrap">
-      <textarea class="chat-input" id="chatInput" rows="1" placeholder="यहाँ लिखें या बोलें…" maxlength="600"></textarea>
-      <button class="send-btn" id="sendBtn" onclick="sendMsg()">➤</button>
+      <div class="id-card" onclick="startChat(this,'vriddha','वृद्ध/वृद्धा','👴')">
+        <span class="id-emoji">👴</span>
+        <div class="id-label">वृद्ध/वृद्धा</div>
+        <div class="id-desc">60+ वर्ष आयु</div>
+      </div>
+      <div class="id-card" onclick="startChat(this,'divyang','दिव्यांगजन','♿')">
+        <span class="id-emoji">♿</span>
+        <div class="id-label">दिव्यांगजन</div>
+        <div class="id-desc">40%+ विकलांगता</div>
+      </div>
+      <div class="id-card" onclick="startChat(this,'parivar','परिवार/अन्य','👨‍👩‍👧')">
+        <span class="id-emoji">👨‍👩‍👧</span>
+        <div class="id-label">परिवार/अन्य</div>
+        <div class="id-desc">राशन · आवास · बीमा</div>
+      </div>
+      <div class="id-card" onclick="startChat(this,'retired','सेवानिवृत्त','👨‍💼')">
+        <span class="id-emoji">👨‍💼</span>
+        <div class="id-label">सेवानिवृत्त</div>
+        <div class="id-desc">Gratuity · Pension · GPF</div>
+      </div>
     </div>
   </div>
+
+  <!-- MESSAGES AREA -->
+  <div class="msgs-area" id="msgsArea" style="display:none;">
+    <div class="date-pill"><span>आज</span></div>
+  </div>
+
+  <!-- RESET -->
+  <div class="reset-wrap" id="resetWrap" style="display:none;">
+    <button class="reset-btn" onclick="resetAll()">↩ दोबारा शुरू करें</button>
+  </div>
+
+</div><!-- /scroll-area -->
+
+<!-- INPUT BAR -->
+<div class="input-bar" id="inputBar" style="display:none;">
+  <textarea class="input-box" id="chatInput" rows="1" placeholder="यहाँ लिखें…" maxlength="600"></textarea>
+  <button class="send-btn" id="sendBtn" onclick="sendMsg()">➤</button>
 </div>
 
-<button class="reset-btn" id="resetBtn" style="display:none;" onclick="resetAll()">↩ दोबारा शुरू करें</button>
-
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-header">
+    <div class="modal-hdr">
       <div class="modal-title" id="modalTitle">आवेदन प्रारूप</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
@@ -268,16 +431,16 @@
   </div>
 </div>
 
-<footer>
-  <strong>लाभार्थी सेतु</strong> — Dhriti Business Solutions Pvt. Ltd. का एक निःशुल्क नागरिक सेवा उपकरण<br>
-  यह पोर्टल केवल मार्गदर्शन हेतु है। अंतिम निर्णय संबंधित विभाग का होगा।
-</footer>
-
 <script>
 const MODEL = 'claude-haiku-4-5-20251001';
 let identity = null;
 let chatHistory = [];
 let currentPrarup = '';
+
+function getNow() {
+  const d = new Date();
+  return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+}
 
 function getSystemPrompt(label) {
   return `आप लाभार्थी सेतु के AI सहायक हैं — UP सरकार की कल्याण योजनाओं के विशेषज्ञ।
@@ -290,21 +453,16 @@ function getSystemPrompt(label) {
 1. MAX 4 सवाल — फिर PRARUP अनिवार्य।
 2. PRARUP से पहले user का नाम, पिता/पति का नाम, पूरा पता, जनपद जरूर पूछो।
 3. [brackets] वाले placeholder NEVER मत छोड़ो — user की जानकारी से भरो।
-4. शुद्ध सरकारी हिंदी लिखो — वर्तनी बिल्कुल सही होनी चाहिए।
-   सही: महोदय, सविनय, निवेदन, प्रार्थना, संलग्न, आज्ञाकारी, सेवानिवृत्त
-   गलत: महोधय, सविनाय, निवेदान, प्राथना
-2. हर scheme का direct portal link दो।
-3. 3rd message के बाद PRARUP जरूर generate करो।
-4. PRARUP ALWAYS ---PRARUP_START--- से शुरू करो और ---PRARUP_END--- पर खत्म करो।
-5. CRITICAL: ---PRARUP_START--- के पहले और ---PRARUP_END--- के बाद PRARUP का कोई भी content मत लिखो।
-6. "पत्र यहाँ है" या "पत्र तैयार है" लिखकर blank मत छोड़ो — markers के ANDAR hi likho।
-7. अगर markers use नहीं किए तो PRARUP detect नहीं होगा और user को नहीं मिलेगा।
+4. शुद्ध सरकारी हिंदी लिखो।
+5. हर scheme का direct portal link दो।
+6. PRARUP ALWAYS ---PRARUP_START--- से शुरू करो और ---PRARUP_END--- पर खत्म करो।
+7. CRITICAL: ---PRARUP_START--- के पहले और ---PRARUP_END--- के बाद PRARUP का कोई भी content मत लिखो।
 
 PRARUP — EXACTLY इस format में:
 ---PRARUP_START---
 सेवा में,
-[पद — जैसे: जिला समाज कल्याण अधिकारी],
-[कार्यालय — जैसे: समाज कल्याण विभाग, लखनऊ]
+[पद],
+[कार्यालय]
 
 विषय: [योजना नाम] हेतु आवेदन
 
@@ -317,78 +475,35 @@ PRARUP — EXACTLY इस format में:
 संलग्न दस्तावेज़:
 1. आधार कार्ड
 2. [दस्तावेज़]
-3. [दस्तावेज़]
-4. बैंक पासबुक
+3. बैंक पासबुक
 
-🔗 Portal: [URL जैसे https://sspy-up.gov.in]
+🔗 Portal: [URL]
 📞 Helpline: [number]
 
 आपकी आज्ञाकारी,
 [नाम] | मोबाइल: __________ | दिनांक: __________
-हस्ताक्षर: ___________
 ---PRARUP_END---
 
-Real portals: sspy-up.gov.in, pmjay.gov.in, scholarship.up.gov.in, jansunwai.up.nic.in
+Real portals: sspy-up.gov.in, pmjay.gov.in, jansunwai.up.nic.in
 
-सेवानिवृत्त कर्मचारी — ESCALATION LADDER (यह हमेशा follow करो):
-
-जब user अपना विभाग बताए — तुरंत उस विभाग की authority chain use करो:
+सेवानिवृत्त कर्मचारी — escalation ladder follow करो:
 - Aided/Govt School → madhyamik chain
-- Basic School/Primary → basic chain  
+- Basic School → basic chain
 - Police/PAC → police chain
-- Revenue/Lekhpal → revenue chain
-- PUVVNL/Bijli → puvvnl chain
+- Revenue → revenue chain
+- PUVVNL → puvvnl chain
 - Secretariat → secretariat chain
-- अन्य → default chain (DDO → जिला अधिकारी → मण्डल → विभागाध्यक्ष)
+- अन्य → default chain
 
-STEP 1 — DDO को आवेदन (Day 1)
-- DDO = प्रधानाचार्य/Principal (Aided College)
-- UP Retirement Benefit Rules 1961 के तहत gratuity 1 माह में देना अनिवार्य
-- Deadline नहीं दी तो contempt possible
-
-STEP 2 — अगर 30 दिन में जवाब नहीं (Day 31)
-- DIOS (जिला विद्यालय निरीक्षक), लखनऊ को पत्र
-- Controlling Authority है — DDO पर action ले सकता है
-
-STEP 3 — अगर 15 दिन और बीत गए (Day 46)
-- अपर शिक्षा निदेशक (माध्यमिक), लखनऊ मण्डल को पत्र
-- Sanctioning Authority — pension PPO जारी करता है
-
-STEP 4 — Jansunwai (Day 46 — parallel में करो)
-- https://jansunwai.up.nic.in पर ऑनलाइन शिकायत
-- Complaint ID लो — 30 दिन में निस्तारण अनिवार्य (UP Jansunwai Act)
-- Reminder feature से track करो
-
-STEP 5 — CM Helpline 1076 (Day 60)
-- 1076 पर call करो — शिकायत दर्ज होगी
-- Chief Minister Office सीधे monitor करता है
-- सबसे fast resolution यहीं होती है आमतौर पर
-
-STEP 6 — अंतिम उपाय (Day 75+)
-- निदेशक, माध्यमिक शिक्षा, उ.प्र., लखनऊ को registered पत्र
-- DPPG portal: https://dppg.up.gov.in पर pension status track करो
-- High Court Lucknow Bench में Writ — अगर सब fail हो
-
-हर STEP का अलग PRARUP बनाओ। User जो step चुने, उसका letter तैयार करो।
-User को बताओ: "यह आपका अधिकार है — माँगने पर मिलेगा, चुप रहने पर नहीं।"
-
-Authorities:
-- DDO = Principal/Head of Institution
-- DIOS = जिला विद्यालय निरीक्षक (District Inspector of Schools)
-- Addl. Director = अपर शिक्षा निदेशक माध्यमिक, लखनऊ मण्डल  
-- Treasury = जिला कोषागार अधिकारी, लखनऊ
-- Director = निदेशक माध्यमिक शिक्षा उ.प्र. लखनऊ
-- CM Helpline: 1076
-- Jansunwai: https://jansunwai.up.nic.in
-- DPPG: https://dppg.up.gov.in`;
+हर STEP का अलग PRARUP बनाओ।`;
 }
 
 const WELCOMES = {
-  vidhwa: 'नमस्ते! 🙏 आपकी सहायता के लिए यहाँ हूँ।\n\nसबसे पहले बताएं — क्या आपके पास पति का मृत्यु प्रमाण पत्र है?',
-  vriddha: 'नमस्ते! 🙏 वृद्धावस्था पेंशन और स्वास्थ्य योजनाओं में सहायता करूँगा।\n\nआपकी आयु कितनी है? और क्या राशन कार्ड है?',
-  divyang: 'नमस्ते! 🙏 दिव्यांग पेंशन, UDID कार्ड और छात्रवृत्ति में सहायता करूँगा।\n\nक्या आपके पास विकलांगता प्रमाण पत्र है? यदि नहीं है तो भी बताएं — बनवाने की प्रक्रिया भी समझाऊँगा।',
-  parivar: 'नमस्ते! 🙏 परिवार के लिए सही योजना खोजने में मदद करूँगा।\n\nआपकी मुख्य जरूरत क्या है?\n• राशन / खाद्यान्न\n• आवास / मकान\n• स्वास्थ्य बीमा\n• विवाह सहायता',
-  retired: 'नमस्ते! 🙏 सेवानिवृत्त कर्मचारियों के अधिकारों में सहायता करूँगा।\n\nआपकी समस्या क्या है?\n• Gratuity नहीं मिली\n• Pension रुकी है\n• GPF settlement बाकी है\n• विभागीय शिकायत'
+  vidhwa:  'नमस्ते! 🙏\n\nविधवा पेंशन और सहायता योजनाओं में मदद करूँगा।\n\nसबसे पहले बताएं — पति का मृत्यु प्रमाण पत्र है?',
+  vriddha: 'नमस्ते! 🙏\n\nवृद्धावस्था पेंशन और स्वास्थ्य योजनाओं में सहायता करूँगा।\n\nआपकी आयु कितनी है? राशन कार्ड है?',
+  divyang: 'नमस्ते! 🙏\n\nदिव्यांग पेंशन, UDID कार्ड और छात्रवृत्ति में सहायता करूँगा।\n\nविकलांगता प्रमाण पत्र है? नहीं है तो भी बताएं।',
+  parivar: 'नमस्ते! 🙏\n\nपरिवार के लिए सही योजना खोजने में मदद करूँगा।\n\nमुख्य जरूरत क्या है?\n• राशन / खाद्यान्न\n• आवास / मकान\n• स्वास्थ्य बीमा\n• विवाह सहायता',
+  retired: 'नमस्ते! 🙏\n\nसेवानिवृत्त कर्मचारियों के अधिकारों में सहायता करूँगा।\n\nसमस्या क्या है?\n• Gratuity नहीं मिली\n• Pension रुकी है\n• GPF settlement बाकी है',
 };
 
 function startChat(card, type, label, emoji) {
@@ -398,25 +513,33 @@ function startChat(card, type, label, emoji) {
   chatHistory = [];
   currentPrarup = '';
 
-  document.getElementById('chatWrap').classList.add('visible');
-  document.getElementById('chatHead').textContent = `${emoji} ${label} — AI सहायक`;
-  document.getElementById('resetBtn').style.display = 'flex';
-  document.getElementById('chatMsgs').innerHTML = '';
+  // Update header
+  document.getElementById('hdrSub').textContent = emoji + ' ' + label + ' — AI सहायक';
+
+  // Show chat UI
+  document.getElementById('chooser').style.display = 'none';
+  document.getElementById('msgsArea').style.display = 'flex';
+  document.getElementById('inputBar').style.display = 'flex';
+  document.getElementById('resetWrap').style.display = 'block';
 
   addBotMsg(WELCOMES[type] || 'नमस्ते! अपनी समस्या बताएं।');
+
   if (type === 'retired') {
-    setTimeout(() => {
-      // Ask dept first then show ladder
-      addEscalationLadder('default');
-    }, 500);
+    setTimeout(() => addEscalationLadder('default'), 600);
   }
 
   const input = document.getElementById('chatInput');
   input.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); } };
-  input.oninput = () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 100) + 'px'; };
+  input.oninput = () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  };
+  setTimeout(() => { input.focus(); scrollBottom(); }, 300);
+}
 
-  setTimeout(() => document.getElementById('chatWrap').scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-  setTimeout(() => input.focus(), 400);
+function scrollBottom() {
+  const sa = document.getElementById('scrollArea');
+  sa.scrollTop = sa.scrollHeight;
 }
 
 async function sendMsg() {
@@ -449,7 +572,7 @@ async function sendMsg() {
     typingEl.remove();
     chatHistory.push({ role: 'assistant', content: reply });
 
-    if (reply.includes('---PRARUP_START---') || reply.includes('PRARUP_START')) {
+    if (reply.includes('---PRARUP_START---')) {
       const m = reply.match(/---?PRARUP_START---?([\s\S]*?)---?PRARUP_END---?/);
       if (m) {
         currentPrarup = m[1].trim();
@@ -462,266 +585,181 @@ async function sendMsg() {
     }
   } catch(e) {
     typingEl.remove();
-    addBotMsg('⚠️ कुछ गड़बड़ हुई। कृपया दोबारा कोशिश करें।');
+    addBotMsg('⚠️ कुछ गड़बड़ हुई। दोबारा कोशिश करें।');
   }
   btn.disabled = false;
-  document.getElementById('chatInput').focus();
+  scrollBottom();
 }
 
-function addBotMsg(text, showActions = true) {
-  const msgs = document.getElementById('chatMsgs');
+function renderText(text, el) {
+  const clean = text.replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1').replace(/#{1,3}\s+/g,'');
+  const parts = clean.split(/(https?:\/\/[^\s]+)/g);
+  parts.forEach(part => {
+    if (/^https?:\/\//.test(part)) {
+      const a = document.createElement('a');
+      a.href = part; a.textContent = part;
+      a.target = '_blank';
+      el.appendChild(a);
+    } else if (part) {
+      el.appendChild(document.createTextNode(part));
+    }
+  });
+}
+
+function addBotMsg(text) {
+  const area = document.getElementById('msgsArea');
   const row = document.createElement('div');
   row.className = 'msg-row bot';
+
+  const av = document.createElement('div');
+  av.className = 'bot-avatar'; av.textContent = '🤖';
+
   const bub = document.createElement('div');
   bub.className = 'bubble';
-  // Clean markdown formatting
-  const cleanText = text
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1')
-    .replace(/#{1,3}\s+/g, '');
-  // Render links as clickable
-  const withLinks = cleanText.replace(
-    /(https?:\/\/[^\s]+)/g,
-    (url) => `<LINK:${url}>`
-  );
-  if (withLinks.includes('<LINK:')) {
-    bub.innerHTML = '';
-    const parts = withLinks.split(/(<LINK:[^>]+>)/);
-    parts.forEach(part => {
-      const m = part.match(/<LINK:(.+)>/);
-      if (m) {
-        const a = document.createElement('a');
-        a.href = m[1];
-        a.textContent = m[1];
-        a.target = '_blank';
-        a.style.cssText = 'color:var(--green-mid);word-break:break-all;';
-        bub.appendChild(a);
-      } else if (part) {
-        bub.appendChild(document.createTextNode(part));
-      }
-    });
-  } else {
-    bub.textContent = cleanText;
-  }
+  renderText(text, bub);
 
-  if (showActions) {
-    const actRow = document.createElement('div');
-    actRow.style.cssText = 'display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;align-items:center;';
+  const timeEl = document.createElement('div');
+  timeEl.className = 'bubble-time'; timeEl.textContent = getNow();
+  bub.appendChild(timeEl);
 
-    const copyBtn = document.createElement('button');
-    copyBtn.style.cssText = 'background:none;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;color:var(--text-light);padding:3px 10px;font-family:Baloo 2,sans-serif;';
-    copyBtn.textContent = '📋 Copy';
-    copyBtn.onclick = () => { navigator.clipboard.writeText(text); copyBtn.textContent = '✓ Copied!'; setTimeout(() => copyBtn.textContent = '📋 Copy', 2000); };
+  // Action buttons
+  const actRow = document.createElement('div');
+  actRow.className = 'act-row';
 
-    const waBtn = document.createElement('button');
-    waBtn.style.cssText = 'background:none;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;color:var(--text-light);padding:3px 10px;font-family:Baloo 2,sans-serif;';
-    waBtn.textContent = '📤 Share';
-    waBtn.onclick = () => { const s = text.length > 300 ? text.slice(0,297)+'…' : text; window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु से:\n\n'+s+'\n\nlabharti-setu.netlify.app'),'_blank'); };
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'act-btn'; copyBtn.textContent = '📋 Copy';
+  copyBtn.onclick = () => { navigator.clipboard.writeText(text); copyBtn.textContent = '✓ Copied!'; setTimeout(() => copyBtn.textContent = '📋 Copy', 2000); };
 
-    const upBtn = document.createElement('button');
-    upBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;';
-    upBtn.textContent = '👍';
-    upBtn.onclick = () => { upBtn.textContent = '✅'; upBtn.disabled = true; downBtn.disabled = true; };
+  const waBtn = document.createElement('button');
+  waBtn.className = 'act-btn'; waBtn.textContent = '📤 Share';
+  waBtn.onclick = () => { const s = text.length > 300 ? text.slice(0,297)+'…' : text; window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु से:\n\n'+s+'\n\nlabharti-setu.netlify.app'),'_blank'); };
 
-    const downBtn = document.createElement('button');
-    downBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;';
-    downBtn.textContent = '👎';
-    downBtn.onclick = () => { downBtn.textContent = '❌'; upBtn.disabled = true; downBtn.disabled = true; setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं।', false), 300); };
+  const upBtn = document.createElement('button'); upBtn.className = 'act-emoji'; upBtn.textContent = '👍';
+  const dnBtn = document.createElement('button'); dnBtn.className = 'act-emoji'; dnBtn.textContent = '👎';
+  upBtn.onclick = () => { upBtn.textContent = '✅'; upBtn.disabled = true; dnBtn.disabled = true; };
+  dnBtn.onclick = () => { dnBtn.textContent = '❌'; upBtn.disabled = true; dnBtn.disabled = true; setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं।'), 300); };
 
-    actRow.appendChild(copyBtn);
-    actRow.appendChild(waBtn);
-    actRow.appendChild(upBtn);
-    actRow.appendChild(downBtn);
-    bub.appendChild(actRow);
-  }
+  actRow.appendChild(copyBtn); actRow.appendChild(waBtn);
+  actRow.appendChild(upBtn);  actRow.appendChild(dnBtn);
+  bub.appendChild(actRow);
 
-  row.appendChild(bub);
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+  row.appendChild(av); row.appendChild(bub);
+  area.appendChild(row);
+  scrollBottom();
 }
 
 function addUserMsg(text) {
-  const msgs = document.getElementById('chatMsgs');
+  const area = document.getElementById('msgsArea');
   const row = document.createElement('div');
   row.className = 'msg-row user';
   const bub = document.createElement('div');
   bub.className = 'bubble';
   bub.textContent = text;
+  const timeEl = document.createElement('div');
+  timeEl.className = 'bubble-time'; timeEl.textContent = getNow() + ' ✓✓';
+  bub.appendChild(timeEl);
   row.appendChild(bub);
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+  area.appendChild(row);
+  scrollBottom();
 }
 
 function addTyping() {
-  const msgs = document.getElementById('chatMsgs');
+  const area = document.getElementById('msgsArea');
   const row = document.createElement('div');
   row.className = 'msg-row bot';
-  row.innerHTML = '<div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
-  msgs.appendChild(row);
-  msgs.scrollTop = msgs.scrollHeight;
+  const av = document.createElement('div'); av.className = 'bot-avatar'; av.textContent = '🤖';
+  row.innerHTML = '';
+  row.appendChild(av);
+  const bub = document.createElement('div'); bub.className = 'bubble';
+  bub.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  row.appendChild(bub);
+  area.appendChild(row);
+  scrollBottom();
   return row;
 }
 
 function addPrarupCard() {
-  const msgs = document.getElementById('chatMsgs');
+  const area = document.getElementById('msgsArea');
   const card = document.createElement('div');
   card.className = 'prarup-card';
   card.innerHTML = `
-    <div class="prarup-card-title">📋 आवेदन प्रारूप तैयार है!</div>
-    <div class="prarup-card-desc">आपकी स्थिति के अनुसार प्रारूप बना है। Copy करें, भरें और जमा करें।</div>
-    <div class="prarup-actions-row">
+    <div class="prarup-title">📋 आवेदन प्रारूप तैयार है!</div>
+    <div class="prarup-desc">आपकी स्थिति के अनुसार प्रारूप बना है। Copy करें, भरें और जमा करें।</div>
+    <div class="prarup-btns">
       <button class="pact-btn pact-primary" onclick="openModal()">📋 प्रारूप देखें</button>
       <a href="https://sspy-up.gov.in" target="_blank" class="pact-btn pact-green">🔗 SSPY Portal</a>
       <a href="https://jansunwai.up.nic.in" target="_blank" class="pact-btn pact-warn">⚠️ Jan Sunwai</a>
-    </div>
-    <div class="feedback-row">
-      सहायक था?
-      <button class="fb-btn" onclick="this.textContent='✅ धन्यवाद!';this.disabled=true;">👍 हाँ</button>
-      <button class="fb-btn" onclick="feedbackNo(this)">👎 नहीं</button>
     </div>`;
-  msgs.appendChild(card);
-  msgs.scrollTop = msgs.scrollHeight;
+  area.appendChild(card);
+  scrollBottom();
 }
 
 function addEscalationLadder(dept) {
-  // Department-wise authority mapping
   const deptAuth = {
-    madhyamik: {
-      ddo: 'प्रधानाचार्य / Principal (DDO)',
-      l2: 'जिला विद्यालय निरीक्षक (DIOS)',
-      l3: 'अपर शिक्षा निदेशक (माध्यमिक), लखनऊ मण्डल',
-      l4: 'निदेशक, माध्यमिक शिक्षा, उ.प्र., लखनऊ',
-    },
-    basic: {
-      ddo: 'प्रधानाध्यापक / Head Master (DDO)',
-      l2: 'खण्ड शिक्षा अधिकारी (BEO)',
-      l3: 'बेसिक शिक्षा अधिकारी (BSA)',
-      l4: 'निदेशक, बेसिक शिक्षा, उ.प्र., लखनऊ',
-    },
-    police: {
-      ddo: 'थाना प्रभारी / विभागाध्यक्ष (DDO)',
-      l2: 'पुलिस अधीक्षक (SP/SSP)',
-      l3: 'उप महानिरीक्षक (DIG)',
-      l4: 'पुलिस महानिदेशक (DGP), उ.प्र.',
-    },
-    revenue: {
-      ddo: 'तहसीलदार (DDO)',
-      l2: 'उप जिलाधिकारी (SDM)',
-      l3: 'जिलाधिकारी (DM)',
-      l4: 'आयुक्त (Commissioner), लखनऊ मण्डल',
-    },
-    puvvnl: {
-      ddo: 'अधिशासी अभियंता (Executive Engineer, DDO)',
-      l2: 'अधीक्षण अभियंता (Superintending Engineer)',
-      l3: 'मुख्य अभियंता (Chief Engineer)',
-      l4: 'प्रबंध निदेशक (MD), PUVVNL',
-    },
-    secretariat: {
-      ddo: 'अनुभाग अधिकारी (SO/DDO)',
-      l2: 'उप सचिव (Deputy Secretary)',
-      l3: 'विशेष सचिव (Special Secretary)',
-      l4: 'प्रमुख सचिव (Principal Secretary)',
-    },
-    default: {
-      ddo: 'आहरण एवं वितरण अधिकारी (DDO)',
-      l2: 'जिला स्तरीय अधिकारी (Controlling Authority)',
-      l3: 'मण्डलीय अधिकारी (Regional Authority)',
-      l4: 'विभागाध्यक्ष / निदेशक (Head of Department)',
-    }
+    madhyamik:{ddo:'प्रधानाचार्य/Principal (DDO)',l2:'जिला विद्यालय निरीक्षक (DIOS)',l3:'अपर शिक्षा निदेशक (माध्यमिक)',l4:'निदेशक, माध्यमिक शिक्षा उ.प्र.'},
+    basic:{ddo:'प्रधानाध्यापक/Head Master (DDO)',l2:'खण्ड शिक्षा अधिकारी (BEO)',l3:'बेसिक शिक्षा अधिकारी (BSA)',l4:'निदेशक, बेसिक शिक्षा उ.प्र.'},
+    police:{ddo:'विभागाध्यक्ष (DDO)',l2:'पुलिस अधीक्षक (SP/SSP)',l3:'उप महानिरीक्षक (DIG)',l4:'पुलिस महानिदेशक (DGP)'},
+    revenue:{ddo:'तहसीलदार (DDO)',l2:'उप जिलाधिकारी (SDM)',l3:'जिलाधिकारी (DM)',l4:'आयुक्त (Commissioner)'},
+    puvvnl:{ddo:'अधिशासी अभियंता (EE/DDO)',l2:'अधीक्षण अभियंता (SE)',l3:'मुख्य अभियंता (CE)',l4:'प्रबंध निदेशक (MD), PUVVNL'},
+    secretariat:{ddo:'अनुभाग अधिकारी (SO/DDO)',l2:'उप सचिव (Dy. Secretary)',l3:'विशेष सचिव (Spl. Secretary)',l4:'प्रमुख सचिव (Principal Secretary)'},
+    default:{ddo:'आहरण एवं वितरण अधिकारी (DDO)',l2:'जिला स्तरीय अधिकारी (Controlling Authority)',l3:'मण्डलीय अधिकारी (Regional Authority)',l4:'विभागाध्यक्ष/निदेशक'},
   };
-
   const auth = deptAuth[dept] || deptAuth.default;
-
-  const msgs = document.getElementById('chatMsgs');
+  const area = document.getElementById('msgsArea');
   const card = document.createElement('div');
-  card.className = 'escalation-ladder';
+  card.className = 'esc-card';
   card.innerHTML = `
-    <div class="escalation-title">⚡ शिकायत की सीढ़ी — यह आपका कानूनी अधिकार है</div>
-
-    <div class="esc-step">
-      <div class="esc-num">1</div>
-      <div class="esc-content">
-        <div class="esc-authority">${auth.ddo} को आवेदन</div>
-        <div class="esc-deadline">⏰ Day 1 — UP Retirement Rules: 1 माह में देना अनिवार्य</div>
-        <button class="esc-action-btn" onclick="requestPrarup('ddo','${dept}')">📋 PRARUP बनाएं</button>
-      </div>
-    </div>
-
-    <div class="esc-step">
-      <div class="esc-num orange">2</div>
-      <div class="esc-content">
-        <div class="esc-authority">${auth.l2} को शिकायत</div>
-        <div class="esc-deadline">⏰ Day 31 — अगर DDO ने कार्रवाई नहीं की</div>
-        <button class="esc-action-btn" onclick="requestPrarup('l2','${dept}')">📋 PRARUP बनाएं</button>
-      </div>
-    </div>
-
-    <div class="esc-step">
-      <div class="esc-num orange">3</div>
-      <div class="esc-content">
-        <div class="esc-authority">${auth.l3} को पत्र</div>
-        <div class="esc-deadline">⏰ Day 46 — अगर जिला स्तर पर नहीं हुआ</div>
-        <button class="esc-action-btn" onclick="requestPrarup('l3','${dept}')">📋 PRARUP बनाएं</button>
-      </div>
-    </div>
-
-    <div class="esc-step">
-      <div class="esc-num red">4</div>
-      <div class="esc-content">
-        <div class="esc-authority">${auth.l4} को Registered पत्र</div>
-        <div class="esc-deadline">⏰ Day 60 — विभागाध्यक्ष स्तर पर escalate</div>
-        <button class="esc-action-btn" onclick="requestPrarup('l4','${dept}')">📋 PRARUP बनाएं</button>
-      </div>
-    </div>
-
-    <div class="esc-step">
-      <div class="esc-num red">5</div>
-      <div class="esc-content">
-        <div class="esc-authority">जनसुनवाई पोर्टल — ऑनलाइन शिकायत</div>
-        <div class="esc-deadline">⏰ Day 60 — 30 दिन में निस्तारण अनिवार्य (UP Act)</div>
-        <button class="esc-action-btn" onclick="requestPrarup('jansunwai','${dept}')">📋 PRARUP बनाएं</button>
-        <a href="https://jansunwai.up.nic.in" target="_blank" class="esc-action-btn">🔗 Portal</a>
-      </div>
-    </div>
-
-    <div class="esc-step">
-      <div class="esc-num red">6</div>
-      <div class="esc-content">
-        <div class="esc-authority">CM Helpline 1076 — सीधे CMO को</div>
-        <div class="esc-deadline">⏰ Day 75 — सबसे तेज़ resolution, CMO monitor करता है</div>
-        <a href="tel:1076" class="esc-action-btn">📞 1076 Call करें</a>
-      </div>
-    </div>`;
-
-  msgs.appendChild(card);
-  msgs.scrollTop = msgs.scrollHeight;
+    <div class="esc-title">⚡ शिकायत की सीढ़ी — यह आपका कानूनी अधिकार है</div>
+    <div class="esc-step"><div class="esc-num">1</div><div class="esc-content">
+      <div class="esc-authority">${auth.ddo} को आवेदन</div>
+      <div class="esc-deadline">⏰ Day 1 — UP Retirement Rules: 1 माह में देना अनिवार्य</div>
+      <button class="esc-action-btn" onclick="requestPrarup('ddo','${dept}')">📋 PRARUP बनाएं</button>
+    </div></div>
+    <div class="esc-step"><div class="esc-num orange">2</div><div class="esc-content">
+      <div class="esc-authority">${auth.l2} को शिकायत</div>
+      <div class="esc-deadline">⏰ Day 31 — DDO ने कार्रवाई नहीं की</div>
+      <button class="esc-action-btn" onclick="requestPrarup('l2','${dept}')">📋 PRARUP बनाएं</button>
+    </div></div>
+    <div class="esc-step"><div class="esc-num orange">3</div><div class="esc-content">
+      <div class="esc-authority">${auth.l3} को पत्र</div>
+      <div class="esc-deadline">⏰ Day 46 — जिला स्तर पर नहीं हुआ</div>
+      <button class="esc-action-btn" onclick="requestPrarup('l3','${dept}')">📋 PRARUP बनाएं</button>
+    </div></div>
+    <div class="esc-step"><div class="esc-num red">4</div><div class="esc-content">
+      <div class="esc-authority">${auth.l4} को Registered पत्र</div>
+      <div class="esc-deadline">⏰ Day 60 — विभागाध्यक्ष स्तर</div>
+      <button class="esc-action-btn" onclick="requestPrarup('l4','${dept}')">📋 PRARUP बनाएं</button>
+    </div></div>
+    <div class="esc-step"><div class="esc-num red">5</div><div class="esc-content">
+      <div class="esc-authority">जनसुनवाई पोर्टल — ऑनलाइन शिकायत</div>
+      <div class="esc-deadline">⏰ Day 60 — 30 दिन में निस्तारण अनिवार्य (UP Act)</div>
+      <button class="esc-action-btn" onclick="requestPrarup('jansunwai','${dept}')">📋 PRARUP बनाएं</button>
+      <a href="https://jansunwai.up.nic.in" target="_blank" class="esc-action-btn">🔗 Portal</a>
+    </div></div>
+    <div class="esc-step"><div class="esc-num red">6</div><div class="esc-content">
+      <div class="esc-authority">CM Helpline 1076</div>
+      <div class="esc-deadline">⏰ Day 75 — CMO सीधे monitor करता है</div>
+      <a href="tel:1076" class="esc-action-btn">📞 1076 Call करें</a>
+    </div></div>`;
+  area.appendChild(card);
+  scrollBottom();
 }
 
 function requestPrarup(step, dept) {
-  const stepLabels = {
-    ddo: 'DDO को Gratuity/Pension के लिए आवेदन पत्र',
-    l2: 'जिला स्तरीय अधिकारी को शिकायत पत्र (DDO ने कार्रवाई नहीं की)',
-    l3: 'मण्डलीय अधिकारी को शिकायत पत्र (जिला स्तर पर नहीं हुआ)',
-    l4: 'विभागाध्यक्ष/निदेशक को Registered शिकायत पत्र',
-    jansunwai: 'जनसुनवाई पोर्टल के लिए शिकायत का प्रारूप',
+  const labels = {
+    ddo:'DDO को Gratuity/Pension के लिए आवेदन पत्र',
+    l2:'जिला स्तरीय अधिकारी को शिकायत पत्र',
+    l3:'मण्डलीय अधिकारी को शिकायत पत्र',
+    l4:'विभागाध्यक्ष/निदेशक को Registered शिकायत पत्र',
+    jansunwai:'जनसुनवाई पोर्टल के लिए शिकायत का प्रारूप',
   };
-  const deptLabel = dept || 'default';
-  document.getElementById('chatInput').value = 
-    `${stepLabels[step] || step} बनाएं। विभाग: ${deptLabel}। मेरी पूरी जानकारी ऊपर बताई है।`;
+  document.getElementById('chatInput').value = `${labels[step]||step} बनाएं। विभाग: ${dept}। जानकारी ऊपर बताई है।`;
   sendMsg();
 }
 
-function feedbackNo(btn) {
-  btn.textContent = '❌';
-  btn.disabled = true;
-  setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं — मैं फिर से कोशिश करूँगा।'), 300);
-}
-
 function openModal() {
-  const cleanPrarup = currentPrarup
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1');
-  document.getElementById('prarupText').textContent = cleanPrarup;
+  const clean = currentPrarup.replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1');
+  document.getElementById('prarupText').textContent = clean;
   document.getElementById('modalTitle').textContent = `${identity.label} — आवेदन प्रारूप`;
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -730,21 +768,29 @@ function copyPrarup() {
   navigator.clipboard.writeText(currentPrarup);
   const btn = document.querySelector('.copy-btn');
   btn.textContent = '✅ Copy हो गया!';
-  setTimeout(() => btn.innerHTML = '📋 Copy करें', 2000);
+  setTimeout(() => btn.textContent = '📋 Copy करें', 2000);
 }
 function sharePrarup() {
-  const short = currentPrarup.length > 400 ? currentPrarup.slice(0, 397) + '…' : currentPrarup;
-  window.open('https://wa.me/?text=' + encodeURIComponent('लाभार्थी सेतु — प्रारूप:\n\n' + short), '_blank');
+  const s = currentPrarup.length > 400 ? currentPrarup.slice(0,397)+'…' : currentPrarup;
+  window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु — प्रारूप:\n\n'+s),'_blank');
 }
 function resetAll() {
   identity = null; chatHistory = []; currentPrarup = '';
   document.querySelectorAll('.id-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('chatWrap').classList.remove('visible');
-  document.getElementById('resetBtn').style.display = 'none';
-  document.getElementById('chatMsgs').innerHTML = '';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('chooser').style.display = 'block';
+  document.getElementById('msgsArea').style.display = 'none';
+  document.getElementById('msgsArea').innerHTML = '<div class="date-pill"><span>आज</span></div>';
+  document.getElementById('inputBar').style.display = 'none';
+  document.getElementById('resetWrap').style.display = 'none';
+  document.getElementById('hdrSub').textContent = 'सरकारी योजनाओं तक आपका पुल';
+  document.getElementById('scrollArea').scrollTop = 0;
 }
-document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.getElementById('modalOverlay').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
+
+/* Keyboard: auto-scroll on focus */
+document.getElementById('chatInput').addEventListener('focus', () => {
+  setTimeout(scrollBottom, 350);
+});
 </script>
 </body>
 </html>
