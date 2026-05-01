@@ -610,42 +610,55 @@ function addBotMsg(text) {
   const area = document.getElementById('msgsArea');
   const row = document.createElement('div');
   row.className = 'msg-row bot';
-
   const av = document.createElement('div');
   av.className = 'bot-avatar'; av.textContent = '🤖';
-
   const bub = document.createElement('div');
   bub.className = 'bubble';
-  renderText(text, bub);
-
-  const timeEl = document.createElement('div');
-  timeEl.className = 'bubble-time'; timeEl.textContent = getNow();
-  bub.appendChild(timeEl);
-
-  // Action buttons
-  const actRow = document.createElement('div');
-  actRow.className = 'act-row';
-
-  const copyBtn = document.createElement('button');
-  copyBtn.className = 'act-btn'; copyBtn.textContent = '📋 Copy';
-  copyBtn.onclick = () => { navigator.clipboard.writeText(text); copyBtn.textContent = '✓ Copied!'; setTimeout(() => copyBtn.textContent = '📋 Copy', 2000); };
-
-  const waBtn = document.createElement('button');
-  waBtn.className = 'act-btn'; waBtn.textContent = '📤 Share';
-  waBtn.onclick = () => { const s = text.length > 300 ? text.slice(0,297)+'…' : text; window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु से:\n\n'+s+'\n\nlabharti-setu.netlify.app'),'_blank'); };
-
-  const upBtn = document.createElement('button'); upBtn.className = 'act-emoji'; upBtn.textContent = '👍';
-  const dnBtn = document.createElement('button'); dnBtn.className = 'act-emoji'; dnBtn.textContent = '👎';
-  upBtn.onclick = () => { upBtn.textContent = '✅'; upBtn.disabled = true; dnBtn.disabled = true; };
-  dnBtn.onclick = () => { dnBtn.textContent = '❌'; upBtn.disabled = true; dnBtn.disabled = true; setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं।'), 300); };
-
-  actRow.appendChild(copyBtn); actRow.appendChild(waBtn);
-  actRow.appendChild(upBtn);  actRow.appendChild(dnBtn);
-  bub.appendChild(actRow);
-
+  // Show empty bubble immediately — stream content in
   row.appendChild(av); row.appendChild(bub);
   area.appendChild(row);
   scrollBottom();
+  
+  // Stream word by word
+  const words = text.split('');
+  let i = 0, rendered = '';
+  const totalLen = text.length;
+  const baseDelay = totalLen < 150 ? 12 : totalLen < 500 ? 7 : 4;
+
+  function tick() {
+    if (i >= words.length) {
+      // Done — render final with links, add actions
+      bub.innerHTML = '';
+      renderText(rendered, bub);
+      const timeEl = document.createElement('div');
+      timeEl.className = 'bubble-time'; timeEl.textContent = getNow();
+      bub.appendChild(timeEl);
+      const actRow = document.createElement('div'); actRow.className = 'act-row';
+      const cpBtn = document.createElement('button'); cpBtn.className = 'act-btn'; cpBtn.textContent = '📋 Copy';
+      cpBtn.onclick = () => { navigator.clipboard.writeText(text); cpBtn.textContent = '✓ Copied!'; setTimeout(() => cpBtn.textContent = '📋 Copy', 2000); };
+      const waBtn = document.createElement('button'); waBtn.className = 'act-btn'; waBtn.textContent = '📤 Share';
+      waBtn.onclick = () => { const s = text.length>300?text.slice(0,297)+'…':text; window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु से:\n\n'+s+'\n\nlabharti-setu.netlify.app'),'_blank'); };
+      const upBtn = document.createElement('button'); upBtn.className = 'act-emoji'; upBtn.textContent = '👍';
+      const dnBtn = document.createElement('button'); dnBtn.className = 'act-emoji'; dnBtn.textContent = '👎';
+      upBtn.onclick = () => { upBtn.textContent = '✅'; upBtn.disabled = true; dnBtn.disabled = true; };
+      dnBtn.onclick = () => { dnBtn.textContent = '❌'; upBtn.disabled = true; dnBtn.disabled = true; setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं।'), 300); };
+      actRow.appendChild(cpBtn); actRow.appendChild(waBtn); actRow.appendChild(upBtn); actRow.appendChild(dnBtn);
+      bub.appendChild(actRow);
+      scrollBottom(); return;
+    }
+    // Batch chars: 6 at a time for speed
+    const batch = Math.min(6, words.length - i);
+    for (let b = 0; b < batch; b++) { rendered += words[i]; i++; }
+    bub.textContent = rendered;
+    // Auto scroll
+    const sa = document.getElementById('scrollArea');
+    if (sa.scrollHeight - sa.scrollTop - sa.clientHeight < 120) scrollBottom();
+    // Pause on sentence ends
+    const lc = rendered.trim().slice(-1);
+    const pause = /[।.?!]/.test(lc) ? baseDelay * 8 : baseDelay;
+    setTimeout(tick, pause);
+  }
+  requestAnimationFrame(tick);
 }
 
 function addUserMsg(text) {
