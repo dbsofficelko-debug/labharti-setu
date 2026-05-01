@@ -336,8 +336,8 @@ async function sendMsg() {
     typingEl.remove();
     chatHistory.push({ role: 'assistant', content: reply });
 
-    if (reply.includes('---PRARUP_START---')) {
-      const m = reply.match(/---PRARUP_START---([\s\S]*?)---PRARUP_END---/);
+    if (reply.includes('---PRARUP_START---') || reply.includes('PRARUP_START')) {
+      const m = reply.match(/---?PRARUP_START---?([\s\S]*?)---?PRARUP_END---?/);
       if (m) {
         currentPrarup = m[1].trim();
         const clean = reply.replace(/---PRARUP_START---[\s\S]*?---PRARUP_END---/, '').trim();
