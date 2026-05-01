@@ -243,9 +243,11 @@ function getSystemPrompt(label) {
 नियम:
 1. MAX 3 सवाल — फिर PRARUP अनिवार्य। User माँगे या न माँगे।
 2. हर scheme का direct portal link दो।
-3. 3-4 messages के बाद PRARUP generate करो।
+3. 3rd message के बाद PRARUP जरूर generate करो — बिना fail हुए।
+4. PRARUP हमेशा ---PRARUP_START--- से शुरू और ---PRARUP_END--- पर खत्म होना MUST है।
+5. इन markers के बाहर PRARUP content मत लिखो।
 
-PRARUP — हमेशा इस format में ---PRARUP_START--- और ---PRARUP_END--- के बीच:
+PRARUP — EXACTLY इस format में:
 ---PRARUP_START---
 सेवा में,
 [पद — जैसे: जिला समाज कल्याण अधिकारी],
