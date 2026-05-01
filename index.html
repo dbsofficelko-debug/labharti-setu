@@ -320,6 +320,15 @@ Real portals: sspy-up.gov.in, pmjay.gov.in, scholarship.up.gov.in, jansunwai.up.
 
 सेवानिवृत्त कर्मचारी — ESCALATION LADDER (यह हमेशा follow करो):
 
+जब user अपना विभाग बताए — तुरंत उस विभाग की authority chain use करो:
+- Aided/Govt School → madhyamik chain
+- Basic School/Primary → basic chain  
+- Police/PAC → police chain
+- Revenue/Lekhpal → revenue chain
+- PUVVNL/Bijli → puvvnl chain
+- Secretariat → secretariat chain
+- अन्य → default chain (DDO → जिला अधिकारी → मण्डल → विभागाध्यक्ष)
+
 STEP 1 — DDO को आवेदन (Day 1)
 - DDO = प्रधानाचार्य/Principal (Aided College)
 - UP Retirement Benefit Rules 1961 के तहत gratuity 1 माह में देना अनिवार्य
@@ -384,7 +393,10 @@ function startChat(card, type, label, emoji) {
 
   addBotMsg(WELCOMES[type] || 'नमस्ते! अपनी समस्या बताएं।');
   if (type === 'retired') {
-    setTimeout(() => addEscalationLadder(), 500);
+    setTimeout(() => {
+      // Ask dept first then show ladder
+      addEscalationLadder('default');
+    }, 500);
   }
 
   const input = document.getElementById('chatInput');
@@ -559,63 +571,131 @@ function addPrarupCard() {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function addEscalationLadder() {
+function addEscalationLadder(dept) {
+  // Department-wise authority mapping
+  const deptAuth = {
+    madhyamik: {
+      ddo: 'प्रधानाचार्य / Principal (DDO)',
+      l2: 'जिला विद्यालय निरीक्षक (DIOS)',
+      l3: 'अपर शिक्षा निदेशक (माध्यमिक), लखनऊ मण्डल',
+      l4: 'निदेशक, माध्यमिक शिक्षा, उ.प्र., लखनऊ',
+    },
+    basic: {
+      ddo: 'प्रधानाध्यापक / Head Master (DDO)',
+      l2: 'खण्ड शिक्षा अधिकारी (BEO)',
+      l3: 'बेसिक शिक्षा अधिकारी (BSA)',
+      l4: 'निदेशक, बेसिक शिक्षा, उ.प्र., लखनऊ',
+    },
+    police: {
+      ddo: 'थाना प्रभारी / विभागाध्यक्ष (DDO)',
+      l2: 'पुलिस अधीक्षक (SP/SSP)',
+      l3: 'उप महानिरीक्षक (DIG)',
+      l4: 'पुलिस महानिदेशक (DGP), उ.प्र.',
+    },
+    revenue: {
+      ddo: 'तहसीलदार (DDO)',
+      l2: 'उप जिलाधिकारी (SDM)',
+      l3: 'जिलाधिकारी (DM)',
+      l4: 'आयुक्त (Commissioner), लखनऊ मण्डल',
+    },
+    puvvnl: {
+      ddo: 'अधिशासी अभियंता (Executive Engineer, DDO)',
+      l2: 'अधीक्षण अभियंता (Superintending Engineer)',
+      l3: 'मुख्य अभियंता (Chief Engineer)',
+      l4: 'प्रबंध निदेशक (MD), PUVVNL',
+    },
+    secretariat: {
+      ddo: 'अनुभाग अधिकारी (SO/DDO)',
+      l2: 'उप सचिव (Deputy Secretary)',
+      l3: 'विशेष सचिव (Special Secretary)',
+      l4: 'प्रमुख सचिव (Principal Secretary)',
+    },
+    default: {
+      ddo: 'आहरण एवं वितरण अधिकारी (DDO)',
+      l2: 'जिला स्तरीय अधिकारी (Controlling Authority)',
+      l3: 'मण्डलीय अधिकारी (Regional Authority)',
+      l4: 'विभागाध्यक्ष / निदेशक (Head of Department)',
+    }
+  };
+
+  const auth = deptAuth[dept] || deptAuth.default;
+
   const msgs = document.getElementById('chatMsgs');
   const card = document.createElement('div');
   card.className = 'escalation-ladder';
   card.innerHTML = `
-    <div class="escalation-title">⚡ शिकायत की सीढ़ी — यह आपका अधिकार है</div>
+    <div class="escalation-title">⚡ शिकायत की सीढ़ी — यह आपका कानूनी अधिकार है</div>
+
     <div class="esc-step">
       <div class="esc-num">1</div>
       <div class="esc-content">
-        <div class="esc-authority">DDO / प्रधानाचार्य को आवेदन</div>
-        <div class="esc-deadline">⏰ Day 1 — 30 दिन में जवाब देना अनिवार्य</div>
-        <button class="esc-action-btn" onclick="requestPrarup('ddo')">📋 PRARUP बनाएं</button>
+        <div class="esc-authority">${auth.ddo} को आवेदन</div>
+        <div class="esc-deadline">⏰ Day 1 — UP Retirement Rules: 1 माह में देना अनिवार्य</div>
+        <button class="esc-action-btn" onclick="requestPrarup('ddo','${dept}')">📋 PRARUP बनाएं</button>
       </div>
     </div>
+
     <div class="esc-step">
       <div class="esc-num orange">2</div>
       <div class="esc-content">
-        <div class="esc-authority">DIOS (जिला विद्यालय निरीक्षक) को पत्र</div>
-        <div class="esc-deadline">⏰ Day 31 — अगर DDO ने जवाब नहीं दिया</div>
-        <button class="esc-action-btn" onclick="requestPrarup('dios')">📋 PRARUP बनाएं</button>
+        <div class="esc-authority">${auth.l2} को शिकायत</div>
+        <div class="esc-deadline">⏰ Day 31 — अगर DDO ने कार्रवाई नहीं की</div>
+        <button class="esc-action-btn" onclick="requestPrarup('l2','${dept}')">📋 PRARUP बनाएं</button>
       </div>
     </div>
+
     <div class="esc-step">
       <div class="esc-num orange">3</div>
       <div class="esc-content">
-        <div class="esc-authority">Jansunwai Portal पर ऑनलाइन शिकायत</div>
-        <div class="esc-deadline">⏰ Day 31 — DDO के साथ parallel में करें</div>
-        <a href="https://jansunwai.up.nic.in" target="_blank" class="esc-action-btn">🔗 Portal खोलें</a>
+        <div class="esc-authority">${auth.l3} को पत्र</div>
+        <div class="esc-deadline">⏰ Day 46 — अगर जिला स्तर पर नहीं हुआ</div>
+        <button class="esc-action-btn" onclick="requestPrarup('l3','${dept}')">📋 PRARUP बनाएं</button>
       </div>
     </div>
+
     <div class="esc-step">
       <div class="esc-num red">4</div>
       <div class="esc-content">
-        <div class="esc-authority">CM Helpline 1076 पर Call</div>
-        <div class="esc-deadline">⏰ Day 60 — सबसे तेज़ resolution</div>
-        <a href="tel:1076" class="esc-action-btn">📞 1076 Call</a>
+        <div class="esc-authority">${auth.l4} को Registered पत्र</div>
+        <div class="esc-deadline">⏰ Day 60 — विभागाध्यक्ष स्तर पर escalate</div>
+        <button class="esc-action-btn" onclick="requestPrarup('l4','${dept}')">📋 PRARUP बनाएं</button>
       </div>
     </div>
+
     <div class="esc-step">
       <div class="esc-num red">5</div>
       <div class="esc-content">
-        <div class="esc-authority">अपर शिक्षा निदेशक / निदेशक माध्यमिक शिक्षा</div>
-        <div class="esc-deadline">⏰ Day 60 — Registered पत्र भेजें</div>
-        <button class="esc-action-btn" onclick="requestPrarup('director')">📋 PRARUP बनाएं</button>
+        <div class="esc-authority">जनसुनवाई पोर्टल — ऑनलाइन शिकायत</div>
+        <div class="esc-deadline">⏰ Day 60 — 30 दिन में निस्तारण अनिवार्य (UP Act)</div>
+        <button class="esc-action-btn" onclick="requestPrarup('jansunwai','${dept}')">📋 PRARUP बनाएं</button>
+        <a href="https://jansunwai.up.nic.in" target="_blank" class="esc-action-btn">🔗 Portal</a>
+      </div>
+    </div>
+
+    <div class="esc-step">
+      <div class="esc-num red">6</div>
+      <div class="esc-content">
+        <div class="esc-authority">CM Helpline 1076 — सीधे CMO को</div>
+        <div class="esc-deadline">⏰ Day 75 — सबसे तेज़ resolution, CMO monitor करता है</div>
+        <a href="tel:1076" class="esc-action-btn">📞 1076 Call करें</a>
       </div>
     </div>`;
+
   msgs.appendChild(card);
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function requestPrarup(authority) {
-  const labels = {
-    ddo: 'DDO/प्रधानाचार्य को Gratuity/Pension PRARUP',
-    dios: 'DIOS को शिकायत पत्र PRARUP',
-    director: 'निदेशक माध्यमिक शिक्षा को शिकायत PRARUP'
+function requestPrarup(step, dept) {
+  const stepLabels = {
+    ddo: 'DDO को Gratuity/Pension के लिए आवेदन पत्र',
+    l2: 'जिला स्तरीय अधिकारी को शिकायत पत्र (DDO ने कार्रवाई नहीं की)',
+    l3: 'मण्डलीय अधिकारी को शिकायत पत्र (जिला स्तर पर नहीं हुआ)',
+    l4: 'विभागाध्यक्ष/निदेशक को Registered शिकायत पत्र',
+    jansunwai: 'जनसुनवाई पोर्टल के लिए शिकायत का प्रारूप',
   };
-  document.getElementById('chatInput').value = labels[authority] + ' बनाएं';
+  const deptLabel = dept || 'default';
+  document.getElementById('chatInput').value = 
+    `${stepLabels[step] || step} बनाएं। विभाग: ${deptLabel}। मेरी पूरी जानकारी ऊपर बताई है।`;
   sendMsg();
 }
 
