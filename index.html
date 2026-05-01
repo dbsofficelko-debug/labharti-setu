@@ -180,7 +180,12 @@
     <div class="id-card" onclick="startChat(this,'parivar','परिवार/अन्य','👨‍👩‍👧')">
       <span class="id-emoji">👨‍👩‍👧</span>
       <div class="id-label">परिवार/अन्य</div>
-      <div class="id-desc">अन्य योजनाएं</div>
+      <div class="id-desc">राशन · आवास · बीमा</div>
+    </div>
+    <div class="id-card" onclick="startChat(this,'retired','सेवानिवृत्त कर्मचारी','👨‍💼')">
+      <span class="id-emoji">👨‍💼</span>
+      <div class="id-label">सेवानिवृत्त</div>
+      <div class="id-desc">Gratuity · Pension · GPF</div>
     </div>
   </div>
 </div>
@@ -240,6 +245,9 @@ function getSystemPrompt(label) {
   return `आप लाभार्थी सेतु के AI सहायक हैं — UP सरकार की कल्याण योजनाओं के विशेषज्ञ।
 व्यक्ति: ${label}
 
+यह पोर्टल केवल: विधवा · वृद्ध · दिव्यांग · परिवार कल्याण · सेवानिवृत्त के लिए है।
+छात्रवृत्ति के लिए udaan-up.netlify.app पर जाएं — यहाँ मत बताओ।
+
 नियम:
 1. MAX 3 सवाल — फिर PRARUP अनिवार्य। User माँगे या न माँगे।
 2. हर scheme का direct portal link दो।
@@ -277,18 +285,19 @@ PRARUP — EXACTLY इस format में:
 
 Real portals: sspy-up.gov.in, pmjay.gov.in, scholarship.up.gov.in, jansunwai.up.nic.in
 
-अगर कोई सेवानिवृत्त कर्मचारी (Group C/D) हो:
-- Gratuity रुकी है → jansunwai.up.nic.in पर शिकायत + vibhag ke PO/DDO se milein
-- Pension नहीं मिली → Treasury office + DPPG portal
-- GPF settlement → DDO se Form 10-D
-PRARUP में grievance letter format दो।`;
+सेवानिवृत्त कर्मचारी के लिए:
+- Gratuity रुकी → जिला कोषागार + DDO को आवेदन + jansunwai.up.nic.in
+- Pension नहीं → Treasury office + https://dppg.up.gov.in
+- GPF → DDO से Form 10-D + GPF account statement
+- PRARUP में formal grievance letter बनाओ जो DDO/Treasury को दे सकें`;
 }
 
 const WELCOMES = {
   vidhwa: 'नमस्ते! 🙏 आपकी सहायता के लिए यहाँ हूँ।\n\nसबसे पहले बताएं — क्या आपके पास पति का मृत्यु प्रमाण पत्र है?',
   vriddha: 'नमस्ते! 🙏 वृद्धावस्था पेंशन और स्वास्थ्य योजनाओं में सहायता करूँगा।\n\nआपकी आयु कितनी है? और क्या राशन कार्ड है?',
   divyang: 'नमस्ते! 🙏 दिव्यांग पेंशन, UDID कार्ड और छात्रवृत्ति में सहायता करूँगा।\n\nक्या आपके पास विकलांगता प्रमाण पत्र है? यदि नहीं है तो भी बताएं — बनवाने की प्रक्रिया भी समझाऊँगा।',
-  parivar: 'नमस्ते! 🙏 परिवार के लिए सही योजना खोजने में मदद करूँगा।\n\nआपकी मुख्य समस्या क्या है?\n• राशन / खाद्यान्न\n• आवास / मकान\n• बच्चे की पढ़ाई\n• स्वास्थ्य बीमा\n• विवाह सहायता\n• कोई और'
+  parivar: 'नमस्ते! 🙏 परिवार के लिए सही योजना खोजने में मदद करूँगा।\n\nआपकी मुख्य जरूरत क्या है?\n• राशन / खाद्यान्न\n• आवास / मकान\n• स्वास्थ्य बीमा\n• विवाह सहायता',
+  retired: 'नमस्ते! 🙏 सेवानिवृत्त कर्मचारियों के अधिकारों में सहायता करूँगा।\n\nआपकी समस्या क्या है?\n• Gratuity नहीं मिली\n• Pension रुकी है\n• GPF settlement बाकी है\n• विभागीय शिकायत'
 };
 
 function startChat(card, type, label, emoji) {
