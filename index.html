@@ -132,6 +132,39 @@
   footer { background: var(--green-dark); color: rgba(255,255,255,0.6); text-align: center; padding: 16px; font-size: 0.75rem; line-height: 1.6; }
   footer strong { color: rgba(255,255,255,0.9); }
   .divider { height: 1px; background: var(--border); margin: 4px 16px 0; }
+
+  .escalation-ladder {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px; margin-top: 8px;
+    animation: fadeUp 0.35s ease both;
+  }
+  .escalation-title { font-size: 0.88rem; font-weight: 700; color: var(--green-dark); margin-bottom: 10px; }
+  .esc-step {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px dashed var(--border);
+    font-size: 0.8rem; color: var(--text-mid);
+  }
+  .esc-step:last-child { border-bottom: none; }
+  .esc-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green-mid); color: white;
+    font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .esc-num.red { background: #dc2626; }
+  .esc-num.orange { background: #d97706; }
+  .esc-content { flex: 1; }
+  .esc-authority { font-weight: 700; color: var(--text-dark); font-size: 0.82rem; }
+  .esc-deadline { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+  .esc-action-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--green-pale); border: 1px solid var(--border);
+    color: var(--green-dark); padding: 4px 10px; border-radius: 50px;
+    font-size: 0.72rem; font-family: 'Baloo 2', sans-serif;
+    font-weight: 600; cursor: pointer; margin-top: 4px;
+    transition: all 0.15s;
+  }
+  .esc-action-btn:hover { background: var(--green-mid); color: white; border-color: var(--green-mid); }
 </style>
 </head>
 <body>
@@ -285,23 +318,48 @@ PRARUP — EXACTLY इस format में:
 
 Real portals: sspy-up.gov.in, pmjay.gov.in, scholarship.up.gov.in, jansunwai.up.nic.in
 
-सेवानिवृत्त कर्मचारी के लिए:
-- Gratuity रुकी → DDO (संस्था प्रमुख/प्रधानाचार्य) + जिला कोषागार अधिकारी + jansunwai.up.nic.in
-- Pension नहीं → https://dppg.up.gov.in + जिला कोषागार
-- GPF → DDO से Form 10-D
-- PRARUP में 2 अलग letters बनाओ:
-  1. DDO/संस्था प्रमुख को (जो pension paperwork भेजता है)
-  2. जिला कोषागार अधिकारी को
+सेवानिवृत्त कर्मचारी — ESCALATION LADDER (यह हमेशा follow करो):
 
-Aided College के लिए competent authorities:
-- DDO = प्रधानाचार्य/Principal of the institution
-- Controlling Authority = जिला विद्यालय निरीक्षक (DIOS), लखनऊ
-- Sanctioning Authority = अपर शिक्षा निदेशक (माध्यमिक), लखनऊ मण्डल
+STEP 1 — DDO को आवेदन (Day 1)
+- DDO = प्रधानाचार्य/Principal (Aided College)
+- UP Retirement Benefit Rules 1961 के तहत gratuity 1 माह में देना अनिवार्य
+- Deadline नहीं दी तो contempt possible
+
+STEP 2 — अगर 30 दिन में जवाब नहीं (Day 31)
+- DIOS (जिला विद्यालय निरीक्षक), लखनऊ को पत्र
+- Controlling Authority है — DDO पर action ले सकता है
+
+STEP 3 — अगर 15 दिन और बीत गए (Day 46)
+- अपर शिक्षा निदेशक (माध्यमिक), लखनऊ मण्डल को पत्र
+- Sanctioning Authority — pension PPO जारी करता है
+
+STEP 4 — Jansunwai (Day 46 — parallel में करो)
+- https://jansunwai.up.nic.in पर ऑनलाइन शिकायत
+- Complaint ID लो — 30 दिन में निस्तारण अनिवार्य (UP Jansunwai Act)
+- Reminder feature से track करो
+
+STEP 5 — CM Helpline 1076 (Day 60)
+- 1076 पर call करो — शिकायत दर्ज होगी
+- Chief Minister Office सीधे monitor करता है
+- सबसे fast resolution यहीं होती है आमतौर पर
+
+STEP 6 — अंतिम उपाय (Day 75+)
+- निदेशक, माध्यमिक शिक्षा, उ.प्र., लखनऊ को registered पत्र
+- DPPG portal: https://dppg.up.gov.in पर pension status track करो
+- High Court Lucknow Bench में Writ — अगर सब fail हो
+
+हर STEP का अलग PRARUP बनाओ। User जो step चुने, उसका letter तैयार करो।
+User को बताओ: "यह आपका अधिकार है — माँगने पर मिलेगा, चुप रहने पर नहीं।"
+
+Authorities:
+- DDO = Principal/Head of Institution
+- DIOS = जिला विद्यालय निरीक्षक (District Inspector of Schools)
+- Addl. Director = अपर शिक्षा निदेशक माध्यमिक, लखनऊ मण्डल  
 - Treasury = जिला कोषागार अधिकारी, लखनऊ
-- Grievance = निदेशक, माध्यमिक शिक्षा, उ.प्र., लखनऊ (Director Secondary Education)
-- Online: jansunwai.up.nic.in + dppg.up.gov.in
-
-PRARUP में इन सभी अधिकारियों के नाम/पद स्पष्ट लिखो।`;
+- Director = निदेशक माध्यमिक शिक्षा उ.प्र. लखनऊ
+- CM Helpline: 1076
+- Jansunwai: https://jansunwai.up.nic.in
+- DPPG: https://dppg.up.gov.in`;
 }
 
 const WELCOMES = {
@@ -325,6 +383,9 @@ function startChat(card, type, label, emoji) {
   document.getElementById('chatMsgs').innerHTML = '';
 
   addBotMsg(WELCOMES[type] || 'नमस्ते! अपनी समस्या बताएं।');
+  if (type === 'retired') {
+    setTimeout(() => addEscalationLadder(), 500);
+  }
 
   const input = document.getElementById('chatInput');
   input.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); } };
@@ -496,6 +557,66 @@ function addPrarupCard() {
     </div>`;
   msgs.appendChild(card);
   msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addEscalationLadder() {
+  const msgs = document.getElementById('chatMsgs');
+  const card = document.createElement('div');
+  card.className = 'escalation-ladder';
+  card.innerHTML = `
+    <div class="escalation-title">⚡ शिकायत की सीढ़ी — यह आपका अधिकार है</div>
+    <div class="esc-step">
+      <div class="esc-num">1</div>
+      <div class="esc-content">
+        <div class="esc-authority">DDO / प्रधानाचार्य को आवेदन</div>
+        <div class="esc-deadline">⏰ Day 1 — 30 दिन में जवाब देना अनिवार्य</div>
+        <button class="esc-action-btn" onclick="requestPrarup('ddo')">📋 PRARUP बनाएं</button>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num orange">2</div>
+      <div class="esc-content">
+        <div class="esc-authority">DIOS (जिला विद्यालय निरीक्षक) को पत्र</div>
+        <div class="esc-deadline">⏰ Day 31 — अगर DDO ने जवाब नहीं दिया</div>
+        <button class="esc-action-btn" onclick="requestPrarup('dios')">📋 PRARUP बनाएं</button>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num orange">3</div>
+      <div class="esc-content">
+        <div class="esc-authority">Jansunwai Portal पर ऑनलाइन शिकायत</div>
+        <div class="esc-deadline">⏰ Day 31 — DDO के साथ parallel में करें</div>
+        <a href="https://jansunwai.up.nic.in" target="_blank" class="esc-action-btn">🔗 Portal खोलें</a>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num red">4</div>
+      <div class="esc-content">
+        <div class="esc-authority">CM Helpline 1076 पर Call</div>
+        <div class="esc-deadline">⏰ Day 60 — सबसे तेज़ resolution</div>
+        <a href="tel:1076" class="esc-action-btn">📞 1076 Call</a>
+      </div>
+    </div>
+    <div class="esc-step">
+      <div class="esc-num red">5</div>
+      <div class="esc-content">
+        <div class="esc-authority">अपर शिक्षा निदेशक / निदेशक माध्यमिक शिक्षा</div>
+        <div class="esc-deadline">⏰ Day 60 — Registered पत्र भेजें</div>
+        <button class="esc-action-btn" onclick="requestPrarup('director')">📋 PRARUP बनाएं</button>
+      </div>
+    </div>`;
+  msgs.appendChild(card);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function requestPrarup(authority) {
+  const labels = {
+    ddo: 'DDO/प्रधानाचार्य को Gratuity/Pension PRARUP',
+    dios: 'DIOS को शिकायत पत्र PRARUP',
+    director: 'निदेशक माध्यमिक शिक्षा को शिकायत PRARUP'
+  };
+  document.getElementById('chatInput').value = labels[authority] + ' बनाएं';
+  sendMsg();
 }
 
 function feedbackNo(btn) {
