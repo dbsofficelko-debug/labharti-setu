@@ -231,7 +231,6 @@
 </footer>
 
 <script>
-const API_URL = '/.netlify/functions/ai';
 const MODEL = 'claude-haiku-4-5-20251001';
 let identity = null;
 let chatHistory = [];
@@ -331,7 +330,7 @@ async function sendMsg() {
   const typingEl = addTyping();
 
   try {
-    const resp = await fetch(API_URL, {
+    const resp = await fetch('https://nyaysahayak.co.in/.netlify/functions/ai', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
