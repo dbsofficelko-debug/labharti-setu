@@ -240,16 +240,19 @@ function getSystemPrompt(label) {
   return `आप लाभार्थी सेतु के AI सहायक हैं — UP सरकार की कल्याण योजनाओं के विशेषज्ञ।
 व्यक्ति की पहचान: ${label}
 
-आपका कार्य:
-1. सहानुभूति से स्थिति समझें (2-3 सरल सवाल — एक-एक करके)
-2. उपयुक्त UP/केंद्र सरकार योजनाएं बताएं जैसे:
-   - निराश्रित महिला पेंशन, वृद्धावस्था पेंशन, दिव्यांग पेंशन (SSPY पोर्टल)
-   - Ayushman Bharat, PM Awas, PM Ujjwala, Kanya Sumangala
-   - Shadi Anudan, Parivarik Labh, Rashtriya Parivarik Labh
-3. हर योजना के लिए बताएं: पात्रता, दस्तावेज़, portal link, helpline
-4. अंत में PRARUP तैयार करें
+कठोर नियम:
+1. NEVER RAMBLE — 3-4 lines max per response। सीधे बात करो।
+2. EK SAWAAL — एक बार में सिर्फ एक सवाल।
+3. User ने जानकारी दी → तुरंत scheme नाम + eligibility + portal बताओ।
+4. 3-4 exchanges के बाद PRARUP बनाओ।
 
-जब user योजना confirm करे या तैयार हो, PRARUP इस format में दें:
+Response format:
+- पहले: relevant scheme का नाम
+- फिर: एक line eligibility  
+- फिर: portal link + helpline
+- फिर: एक follow-up सवाल
+
+जब PRARUP ready हो:
 ---PRARUP_START---
 सेवा में,
 [अधिकारी का पद],
@@ -258,32 +261,20 @@ function getSystemPrompt(label) {
 विषय: [योजना का नाम] हेतु आवेदन-पत्र
 
 महोदय/महोदया,
-
-सविनय निवेदन है कि मैं [नाम], पुत्री/पत्नी/पुत्र [________], निवासी [पता], जनपद [________] हूँ।
-
-[2-3 पंक्ति स्थिति विवरण — जैसे: मेरे पति की मृत्यु दिनांक ______ को हो गई है। मैं आर्थिक रूप से असहाय हूँ और परिवार का भरण-पोषण करने में असमर्थ हूँ।]
-
-अतः श्रीमान से विनम्र प्रार्थना है कि [योजना नाम] के अंतर्गत मुझे लाभ प्रदान करने की कृपा करें।
+सविनय निवेदन है कि मैं [नाम], निवासी [पता], जनपद [________] हूँ।
+[स्थिति 2 पंक्ति]
+अतः [योजना नाम] के अंतर्गत लाभ प्रदान करने की कृपा करें।
 
 संलग्न दस्तावेज़:
 1. [दस्तावेज़ 1]
 2. [दस्तावेज़ 2]
 3. [दस्तावेज़ 3]
-4. [दस्तावेज़ 4]
 
 आपकी आज्ञाकारी,
-[नाम]
-मोबाइल: [__________]
-दिनांक: ___________
-हस्ताक्षर/अंगूठा: ___________
+[नाम] | मोबाइल: __________ | दिनांक: __________
 ---PRARUP_END---
 
-नियम:
-- सरल हिंदी — आम आदमी की भाषा
-- एक बार में एक सवाल
-- दयालु और धैर्यवान रहें
-- Real portal links दें: sspy-up.gov.in, scholarship.up.gov.in, pmjay.gov.in
-- अगर समस्या हो — jansunwai.up.nic.in बताएं`;
+भाषा: सरल हिंदी। दयालु tone। Real portals: sspy-up.gov.in, pmjay.gov.in`;
 }
 
 const WELCOMES = {
@@ -364,13 +355,45 @@ async function sendMsg() {
   document.getElementById('chatInput').focus();
 }
 
-function addBotMsg(text) {
+function addBotMsg(text, showActions = true) {
   const msgs = document.getElementById('chatMsgs');
   const row = document.createElement('div');
   row.className = 'msg-row bot';
   const bub = document.createElement('div');
   bub.className = 'bubble';
   bub.textContent = text;
+
+  if (showActions) {
+    const actRow = document.createElement('div');
+    actRow.style.cssText = 'display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;align-items:center;';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.style.cssText = 'background:none;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;color:var(--text-light);padding:3px 10px;font-family:Baloo 2,sans-serif;';
+    copyBtn.textContent = '📋 Copy';
+    copyBtn.onclick = () => { navigator.clipboard.writeText(text); copyBtn.textContent = '✓ Copied!'; setTimeout(() => copyBtn.textContent = '📋 Copy', 2000); };
+
+    const waBtn = document.createElement('button');
+    waBtn.style.cssText = 'background:none;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:11px;color:var(--text-light);padding:3px 10px;font-family:Baloo 2,sans-serif;';
+    waBtn.textContent = '📤 Share';
+    waBtn.onclick = () => { const s = text.length > 300 ? text.slice(0,297)+'…' : text; window.open('https://wa.me/?text='+encodeURIComponent('लाभार्थी सेतु से:\n\n'+s+'\n\nlabharti-setu.netlify.app'),'_blank'); };
+
+    const upBtn = document.createElement('button');
+    upBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;';
+    upBtn.textContent = '👍';
+    upBtn.onclick = () => { upBtn.textContent = '✅'; upBtn.disabled = true; downBtn.disabled = true; };
+
+    const downBtn = document.createElement('button');
+    downBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;';
+    downBtn.textContent = '👎';
+    downBtn.onclick = () => { downBtn.textContent = '❌'; upBtn.disabled = true; downBtn.disabled = true; setTimeout(() => addBotMsg('क्या सही नहीं लगा? बताएं।', false), 300); };
+
+    actRow.appendChild(copyBtn);
+    actRow.appendChild(waBtn);
+    actRow.appendChild(upBtn);
+    actRow.appendChild(downBtn);
+    bub.appendChild(actRow);
+  }
+
   row.appendChild(bub);
   msgs.appendChild(row);
   msgs.scrollTop = msgs.scrollHeight;
